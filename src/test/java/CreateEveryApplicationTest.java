@@ -9,7 +9,7 @@ import org.testng.annotations.*;
 
 import java.time.Duration;
 
-public class CreateApplicationTest {
+public class CreateEveryApplicationTest {
     private static WebDriver driver;
 
     String testName = "aaaaa";
