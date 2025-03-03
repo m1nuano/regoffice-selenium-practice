@@ -70,7 +70,7 @@ public class CreateApplicationTest {
 
         WebElement chooseOptionNext2 = driver.findElement(By.xpath("//button[contains(text(), 'Далее')]"));
         chooseOptionNext2.click();
-        // 4
+        
         WebElement dateOfRegistration = driver.findElement(By.xpath("//div[label[contains(text(), 'Дата регистрации')]]/following-sibling::input"));
         WebElement newFamily = driver.findElement(By.xpath("//div[label[contains(text(), 'Новая фамилия')]]/following-sibling::input"));
         WebElement lastNameOfSpouse = driver.findElement(By.xpath("//div[label[contains(text(), 'Фамилия супруга')]]/following-sibling::input"));
