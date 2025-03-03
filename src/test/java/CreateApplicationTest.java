@@ -11,80 +11,86 @@ public class CreateApplicationTest {
 
     @Test
     void CreateMarriageApplication(){
-        // init
-        String username = "user";
-        String password = "senlatest";
-        WebDriverManager.chromedriver().setup();
+        String username = System.getenv("APP_USERNAME");
+        String password = System.getenv("APP_PASSWORD");
+        String baseUrl = "https://%s:%s@regoffice.senla.eu/";
+        String formattedUrl = String.format(baseUrl, username, password);
+
+        WebDriverManager.edgedriver().setup();
         WebDriver driver = new EdgeDriver();
+        driver.get(formattedUrl);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
-        // 0
-        driver.get("https://" + username + ":" + password + "@regoffice.senla.eu/");
+
+        String testName = "aaaaa";
+        String testPhone = "12345678";
+        String testPassport = "12345678";
+        String testAddress = "12345678";
+        String testDate = "1111-11-11";
+        String testGender = "1111";
+        String testFamilyName = "11111";
+
         WebElement chooseApplicationOption = driver.findElement(By.xpath("//button[contains(text(), 'Войти как пользователь')]"));
         chooseApplicationOption.click();
-        // 1
-        WebElement applicantLastName = driver.findElement(By.xpath("//input[@id='TextInputField-1']"));
-        WebElement applicantFirstName = driver.findElement(By.xpath("//input[@id='TextInputField-2']"));
-        WebElement applicantMiddleName = driver.findElement(By.xpath("//input[@id='TextInputField-3']"));
-        WebElement applicantTelephoneNumber = driver.findElement(By.xpath("//input[@id='TextInputField-4']"));
-        WebElement applicantPassportNumber = driver.findElement(By.xpath("//input[@id='TextInputField-5']"));
-        WebElement applicantResidentialAddress = driver.findElement(By.xpath("//input[@id='TextInputField-6']"));
 
-        applicantLastName.sendKeys("aaaaa");
-        applicantFirstName.sendKeys("aaaaa");
-        applicantMiddleName.sendKeys("aaaaa");
-        applicantTelephoneNumber.sendKeys("12345678");
-        applicantPassportNumber.sendKeys("12345678");
-        applicantResidentialAddress.sendKeys("12345678");
+        WebElement applicantLastName = driver.findElement(By.xpath("//div[label[contains(text(), 'Фамилия')]]/following-sibling::input"));
+        WebElement applicantFirstName = driver.findElement(By.xpath("//div[label[contains(text(), 'Имя')]]/following-sibling::input"));
+        WebElement applicantMiddleName = driver.findElement(By.xpath("//div[label[contains(text(), 'Отчество')]]/following-sibling::input"));
+        WebElement applicantTelephoneNumber = driver.findElement(By.xpath("//div[label[contains(text(), 'Телефон')]]/following-sibling::input"));
+        WebElement applicantPassportNumber = driver.findElement(By.xpath("//div[label[contains(text(), 'Номер паспорта')]]/following-sibling::input"));
+        WebElement applicantResidentialAddress = driver.findElement(By.xpath("//div[label[contains(text(), 'Адрес')]]/following-sibling::input"));
+
+        applicantLastName.sendKeys(testName);
+        applicantFirstName.sendKeys(testName);
+        applicantMiddleName.sendKeys(testName);
+        applicantTelephoneNumber.sendKeys(testPhone);
+        applicantPassportNumber.sendKeys(testPassport);
+        applicantResidentialAddress.sendKeys(testAddress);
 
         WebElement chooseOptionNext = driver.findElement(By.xpath("//button[contains(text(), 'Далее')]"));
         chooseOptionNext.click();
-        // 2
+
         WebElement chooseApplicationType = driver.findElement(By.xpath("//button[contains(text(), 'Регистрация брака')]"));
         chooseApplicationType.click();
-        // 3
-        WebElement citizenLastName = driver.findElement(By.xpath("//input[@id='TextInputField-7']"));
-        WebElement citizenFirstName = driver.findElement(By.xpath("//input[@id='TextInputField-8']"));
-        WebElement citizenMiddleName = driver.findElement(By.xpath("//input[@id='TextInputField-9']"));
-        WebElement citizenDateOfBirth = driver.findElement(By.xpath("//input[@id='TextInputField-10']"));
-        WebElement citizenNumberOfPassports = driver.findElement(By.xpath("//input[@id='TextInputField-11']"));
-        WebElement citizenGender = driver.findElement(By.xpath("//input[@id='TextInputField-12']"));
-        WebElement citizenResidenceAddress = driver.findElement(By.xpath("//input[@id='TextInputField-13']"));
 
-        citizenLastName.sendKeys("aaaaa");
-        citizenFirstName.sendKeys("aaaaa");
-        citizenMiddleName.sendKeys("aaaaa");
-        citizenDateOfBirth.sendKeys("1111-11-11");
-        citizenNumberOfPassports.sendKeys("aaaaa");
-        citizenGender.sendKeys("aaaa");
-        citizenResidenceAddress.sendKeys("aaaaa");
+        WebElement citizenLastName = driver.findElement(By.xpath("//div[label[contains(text(), 'Фамилия')]]/following-sibling::input"));
+        WebElement citizenFirstName = driver.findElement(By.xpath("//div[label[contains(text(), 'Имя')]]/following-sibling::input"));
+        WebElement citizenMiddleName = driver.findElement(By.xpath("//div[label[contains(text(), 'Отчество')]]/following-sibling::input"));
+        WebElement citizenDateOfBirth = driver.findElement(By.xpath("//div[label[contains(text(), 'Дата рождения')]]/following-sibling::input"));
+        WebElement citizenNumberOfPassports = driver.findElement(By.xpath("//div[label[contains(text(), 'Номер паспорта')]]/following-sibling::input"));
+        WebElement citizenGender = driver.findElement(By.xpath("//div[label[contains(text(), 'Пол')]]/following-sibling::input"));
+        WebElement citizenResidenceAddress = driver.findElement(By.xpath("//div[label[contains(text(), 'Адрес прописки')]]/following-sibling::input"));
+
+        citizenLastName.sendKeys(testName);
+        citizenFirstName.sendKeys(testName);
+        citizenMiddleName.sendKeys(testName);
+        citizenDateOfBirth.sendKeys(testDate);
+        citizenNumberOfPassports.sendKeys(testPassport);
+        citizenGender.sendKeys(testGender);
+        citizenResidenceAddress.sendKeys(testAddress);
 
         WebElement chooseOptionNext2 = driver.findElement(By.xpath("//button[contains(text(), 'Далее')]"));
         chooseOptionNext2.click();
         // 4
-        WebElement dateOfRegistration = driver.findElement(By.xpath("//input[@id='TextInputField-14']"));
-        WebElement newFamily = driver.findElement(By.xpath("//input[@id='TextInputField-15']"));
-        WebElement lastNameOfSpouse = driver.findElement(By.xpath("//input[@id='TextInputField-16']"));
-        WebElement firstNameOfSpouse = driver.findElement(By.xpath("//input[@id='TextInputField-17']"));
-        WebElement middleNameOfSpouse = driver.findElement(By.xpath("//input[@id='TextInputField-18']"));
-        WebElement dateOfBirthOfSpouse = driver.findElement(By.xpath("//input[@id='TextInputField-19']"));
-        WebElement passportNumberOfSpouse = driver.findElement(By.xpath("//input[@id='TextInputField-20']"));
+        WebElement dateOfRegistration = driver.findElement(By.xpath("//div[label[contains(text(), 'Дата регистрации')]]/following-sibling::input"));
+        WebElement newFamily = driver.findElement(By.xpath("//div[label[contains(text(), 'Новая фамилия')]]/following-sibling::input"));
+        WebElement lastNameOfSpouse = driver.findElement(By.xpath("//div[label[contains(text(), 'Фамилия супруга')]]/following-sibling::input"));
+        WebElement firstNameOfSpouse = driver.findElement(By.xpath("//div[label[contains(text(), 'Имя супруга')]]/following-sibling::input"));
+        WebElement middleNameOfSpouse = driver.findElement(By.xpath("//div[label[contains(text(), 'Отчество супруга')]]/following-sibling::input"));
+        WebElement dateOfBirthOfSpouse = driver.findElement(By.xpath("//div[label[contains(text(), 'Дата рождения супруга')]]/following-sibling::input"));
+        WebElement passportNumberOfSpouse = driver.findElement(By.xpath("//div[label[contains(text(), 'Номер паспорта супруга')]]/following-sibling::input"));
 
-        dateOfRegistration.sendKeys("1111-11-11");
-        newFamily.sendKeys("11111");
-        lastNameOfSpouse.sendKeys("aaaaa");
-        firstNameOfSpouse.sendKeys("aaaaa");
-        middleNameOfSpouse.sendKeys("aaaaa");
-        dateOfBirthOfSpouse.sendKeys("1111-11-11");
-        passportNumberOfSpouse.sendKeys("11111");
+        dateOfRegistration.sendKeys(testDate);
+        newFamily.sendKeys(testFamilyName);
+        lastNameOfSpouse.sendKeys(testName);
+        firstNameOfSpouse.sendKeys(testName);
+        middleNameOfSpouse.sendKeys(testName);
+        dateOfBirthOfSpouse.sendKeys(testDate);
+        passportNumberOfSpouse.sendKeys(testPassport);
 
         WebElement endThisApplication = driver.findElement(By.xpath("//button[contains(text(), 'Завершить')]"));
         endThisApplication.click();
-        // 5 - проверка
-        WebElement checkIfThisApplicationSubmitted = driver.findElement(By.xpath("//span[contains(text(), '№')]"));
 
-        /*
-        Проверил на наличие созданной заявки, ибо regoffice выдает либо №***** заявки или же null в случае ошибки, поэтому выбрал такой вариант прохождения теста
-         */
+        WebElement checkIfThisApplicationSubmitted = driver.findElement(By.xpath("//span[contains(text(), '№')]"));
         assert checkIfThisApplicationSubmitted.isDisplayed();
 
         driver.quit();
