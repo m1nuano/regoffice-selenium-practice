@@ -1,8 +1,10 @@
 package com.test.models;
 
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
 @Getter
+@RequiredArgsConstructor
 public class MarriageData {
     private final String dateOfRegistration;
     private final String newFamily;
@@ -11,16 +13,4 @@ public class MarriageData {
     private final String middleNameOfSpouse;
     private final String dateOfBirthOfSpouse;
     private final String passportNumberOfSpouse;
-
-    public MarriageData(String dateOfRegistration, String newFamily, String lastNameOfSpouse,
-                        String firstNameOfSpouse, String middleNameOfSpouse,
-                        String dateOfBirthOfSpouse, String passportNumberOfSpouse) {
-        this.dateOfRegistration = dateOfRegistration;
-        this.newFamily = newFamily;
-        this.lastNameOfSpouse = lastNameOfSpouse;
-        this.firstNameOfSpouse = firstNameOfSpouse;
-        this.middleNameOfSpouse = middleNameOfSpouse;
-        this.dateOfBirthOfSpouse = dateOfBirthOfSpouse;
-        this.passportNumberOfSpouse = passportNumberOfSpouse;
-    }
 }

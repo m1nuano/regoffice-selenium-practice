@@ -20,6 +20,8 @@ public class AdminFormPage {
     private WebElement dateOfBirthField;
     @FindBy(xpath = "//button[contains(text(), 'Далее')]")
     private WebElement nextButton;
+    @FindBy(xpath = "//button[contains(text(), 'Закрыть')]")
+    private WebElement closeButton;
 
     public AdminFormPage(WebDriver driver) {
         PageFactory.initElements(driver, this);
@@ -37,5 +39,9 @@ public class AdminFormPage {
 
     public void clickNext() {
         nextButton.click();
+    }
+
+    public void clickClose() {
+        closeButton.click();
     }
 }
