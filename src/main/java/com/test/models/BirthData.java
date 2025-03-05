@@ -11,5 +11,4 @@ public class BirthData {
     private final String father;
     private final String grandma;
     private final String grandpa;
-
 }

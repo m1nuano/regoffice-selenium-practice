@@ -1,90 +1,57 @@
-import com.test.constants.TestConstants;
 import com.test.models.BirthData;
 import com.test.models.DeathData;
 import com.test.models.MarriageData;
-import com.test.pages.*;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class CreateEveryApplicationTest extends BaseUserTest implements TestConstants {
+import static com.test.constants.TestConstants.*;
+
+public class CreateEveryApplicationTest extends BaseTest{
 
     @Test
     public void testCreateMarriageApplication() {
-        MainPage mainPage = new MainPage(driver);
-        mainPage.loginAsUser();
+        mainPageSteps.chooseRole(TEST_USERROLE);
 
-        ApplicantFormPage applicantForm = new ApplicantFormPage(driver);
-        applicantForm.fillApplicantData(TEST_NAME, TEST_NAME, TEST_NAME,
-                TEST_PHONE, TEST_PASSPORT, TEST_ADDRESS);
-        applicantForm.clickNext();
+        applicantPageSteps.fillApplicantFormPage(TEST_NAME, TEST_NAME, TEST_NAME, TEST_PHONE, TEST_PASSPORT, TEST_ADDRESS);
 
-        TypeOfApplicationPage typeOfApplicationPage = new TypeOfApplicationPage(driver);
-        typeOfApplicationPage.clickMarryButton();
+        typeOfApplicationSteps.chooseApplication(APP_MARRY);
 
-        CitizenFormPage citizenForm = new CitizenFormPage(driver);
-        citizenForm.fillCitizenData(TEST_NAME, TEST_NAME, TEST_NAME, TEST_DATE,
-                TEST_PASSPORT, TEST_GENDER, TEST_ADDRESS);
-        citizenForm.clickNext();
+        citizenSteps.fillCitizenFormPage(TEST_NAME, TEST_NAME, TEST_NAME, TEST_DATE, TEST_PASSPORT, TEST_GENDER, TEST_ADDRESS);
 
-        MarriageApplicationPage marriageApplicationPage = new MarriageApplicationPage(driver);
-        MarriageData marriageData = new MarriageData(TEST_DATE, TEST_FAMILYNAME, TEST_NAME,
-                TEST_NAME, TEST_NAME, TEST_DATE, TEST_PASSPORT);
-        marriageApplicationPage.fillApplicationData(marriageData);
-        marriageApplicationPage.submitApplication();
+        MarriageData marriageData = new MarriageData(TEST_DATE, TEST_LASTNAME, TEST_NAME, TEST_NAME, TEST_NAME, TEST_DATE, TEST_PASSPORT);
+        marriageAppSteps.fillMarriageApplicationPage(marriageData);
 
-        ApplicationStatusPage statusPage = new ApplicationStatusPage(driver);
-        Assert.assertTrue(statusPage.isApplicationSubmitted(), "Заявка зарегистрирована");
+        Assert.assertTrue(appStatusSteps.checkAppStatusIsPresent());
     }
+
     @Test
     public void testCreateBirthApplication() {
-        MainPage mainPage = new MainPage(driver);
-        mainPage.loginAsUser();
+        mainPageSteps.chooseRole(TEST_USERROLE);
 
-        ApplicantFormPage applicantForm = new ApplicantFormPage(driver);
-        applicantForm.fillApplicantData(TEST_NAME, TEST_NAME, TEST_NAME,
-                TEST_PHONE, TEST_PASSPORT, TEST_ADDRESS);
-        applicantForm.clickNext();
+        applicantPageSteps.fillApplicantFormPage(TEST_NAME, TEST_NAME, TEST_NAME, TEST_PHONE, TEST_PASSPORT, TEST_ADDRESS);
 
-        TypeOfApplicationPage typeOfApplicationPage = new TypeOfApplicationPage(driver);
-        typeOfApplicationPage.clickBirthButton();
+        typeOfApplicationSteps.chooseApplication(APP_BIRTH);
 
-        CitizenFormPage citizenForm = new CitizenFormPage(driver);
-        citizenForm.fillCitizenData(TEST_NAME, TEST_NAME, TEST_NAME, TEST_DATE,
-                TEST_PASSPORT, TEST_GENDER, TEST_ADDRESS);
-        citizenForm.clickNext();
+        citizenSteps.fillCitizenFormPage(TEST_NAME, TEST_NAME, TEST_NAME, TEST_DATE, TEST_PASSPORT, TEST_GENDER, TEST_ADDRESS);
 
-        BirthApplicationPage birthApplicationPage = new BirthApplicationPage(driver);
         BirthData birthData = new BirthData(TEST_ADDRESS, TEST_NAME, TEST_NAME, TEST_NAME, TEST_NAME);
-        birthApplicationPage.fillBirthApplicationData(birthData);
-        birthApplicationPage.submitApplication();
+        birthAppSteps.fillBirthApplicationPage(birthData);
 
-        ApplicationStatusPage statusPage = new ApplicationStatusPage(driver);
-        Assert.assertTrue(statusPage.isApplicationSubmitted(), "Заявка зарегистрирована");
+        Assert.assertTrue(appStatusSteps.checkAppStatusIsPresent());
     }
     @Test
     public void testCreateDeathApplication() {
-        MainPage mainPage = new MainPage(driver);
-        mainPage.loginAsUser();
+        mainPageSteps.chooseRole(TEST_USERROLE);
 
-        ApplicantFormPage applicantForm = new ApplicantFormPage(driver);
-        applicantForm.fillApplicantData(TEST_NAME, TEST_NAME, TEST_NAME,
-                TEST_PHONE, TEST_PASSPORT, TEST_ADDRESS);
-        applicantForm.clickNext();
+        applicantPageSteps.fillApplicantFormPage(TEST_NAME, TEST_NAME, TEST_NAME, TEST_PHONE, TEST_PASSPORT, TEST_ADDRESS);
 
-        TypeOfApplicationPage typeOfApplicationPage = new TypeOfApplicationPage(driver);
-        typeOfApplicationPage.clickDeathButton();
+        typeOfApplicationSteps.chooseApplication(APP_DEATH);
 
-        CitizenFormPage citizenForm = new CitizenFormPage(driver);
-        citizenForm.fillCitizenData(TEST_NAME, TEST_NAME, TEST_NAME, TEST_DATE,
-                TEST_PASSPORT, TEST_GENDER, TEST_ADDRESS);
-        citizenForm.clickNext();
+        citizenSteps.fillCitizenFormPage(TEST_NAME, TEST_NAME, TEST_NAME, TEST_DATE, TEST_PASSPORT, TEST_GENDER, TEST_ADDRESS);
 
-        DeathApplicationPage deathApplicationPage = new DeathApplicationPage(driver);
         DeathData deathData = new DeathData(TEST_DATE, TEST_ADDRESS);
-        deathApplicationPage.fillDeathApplicationData(deathData);
-        deathApplicationPage.submitApplication();
+        deathAppSteps.fillDeathApplicationPage(deathData);
 
-        ApplicationStatusPage statusPage = new ApplicationStatusPage(driver);
-        Assert.assertTrue(statusPage.isApplicationSubmitted(), "Заявка зарегистрирована");
+        Assert.assertTrue(appStatusSteps.checkAppStatusIsPresent());
     }
 }

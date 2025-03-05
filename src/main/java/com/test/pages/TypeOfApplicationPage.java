@@ -1,34 +1,25 @@
 package com.test.pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 public class TypeOfApplicationPage {
 
-    @FindBy(xpath = "//button[contains(text(), 'Регистрация брака')]")
-    private WebElement marryButton;
+    private WebDriver driver;
 
-    @FindBy(xpath = "//button[contains(text(), 'Регистрация рождения')]")
-    private WebElement birthButton;
+    private static final String BUTTON_XPATH = "//button[contains(text(), '%s')]";
 
-    @FindBy(xpath = "//button[contains(text(), 'Регистрация смерти')]")
-    private WebElement deathButton;
 
     public TypeOfApplicationPage(WebDriver driver) {
+        this.driver = driver;
         PageFactory.initElements(driver, this);
     }
 
-    public void clickMarryButton() {
-        marryButton.click();
-    }
-
-    public void clickBirthButton() {
-        birthButton.click();
-    }
-
-    public void clickDeathButton() {
-        deathButton.click();
+    public void chooseApplicationType(String type) {
+        String xpath = String.format(BUTTON_XPATH, type);
+        WebElement button = driver.findElement(By.xpath(xpath));
+        button.click();
     }
 }

@@ -1,45 +1,51 @@
 package com.test.pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+
+import static com.test.constants.TestConstants.*;
 
 public class CitizenFormPage {
 
-    @FindBy(xpath = "//div[label[contains(text(), 'Фамилия')]]/following-sibling::input")
-    private WebElement lastNameField;
-    @FindBy(xpath = "//div[label[contains(text(), 'Имя')]]/following-sibling::input")
-    private WebElement firstNameField;
-    @FindBy(xpath = "//div[label[contains(text(), 'Отчество')]]/following-sibling::input")
-    private WebElement middleNameField;
-    @FindBy(xpath = "//div[label[contains(text(), 'Дата рождения')]]/following-sibling::input")
-    private WebElement dateOfBirthField;
-    @FindBy(xpath = "//div[label[contains(text(), 'Номер паспорта')]]/following-sibling::input")
-    private WebElement numberOfPassportsField;
-    @FindBy(xpath = "//div[label[contains(text(), 'Пол')]]/following-sibling::input")
-    private WebElement genderField;
-    @FindBy(xpath = "//div[label[contains(text(), 'Адрес прописки')]]/following-sibling::input")
-    private WebElement residenceAdressField;
-    @FindBy(xpath = "//button[contains(text(), 'Далее')]")
-    private WebElement nextButton;
+    private WebDriver driver;
+
+    private static final String INPUT_FIELD_XPATH = "//div[label[contains(text(), '%s')]]/following-sibling::input";
+    private static final String BUTTON_XPATH = "//button[contains(text(), '%s')]";
 
     public CitizenFormPage(WebDriver driver) {
+        this.driver = driver;
         PageFactory.initElements(driver, this);
     }
 
-    public void fillCitizenData(String lastName, String firstName, String middleName,
-                                String dateOfBirth, String numberOfPassports, String gender, String residenceAdress) {
-        lastNameField.sendKeys(lastName);
-        firstNameField.sendKeys(firstName);
-        middleNameField.sendKeys(middleName);
-        dateOfBirthField.sendKeys(dateOfBirth);
-        numberOfPassportsField.sendKeys(numberOfPassports);
-        genderField.sendKeys(gender);
-        residenceAdressField.sendKeys(residenceAdress);
+    private WebElement getInputField(String labelText) {
+        String xpath = String.format(INPUT_FIELD_XPATH, labelText);
+        return driver.findElement(By.xpath(xpath));
     }
 
-    public void clickNext(){
-        nextButton.click();
+    private WebElement getButton(String buttonText) {
+        String xpath = String.format(BUTTON_XPATH, buttonText);
+        return driver.findElement(By.xpath(xpath));
+    }
+
+    public void fillField(String labelText, String value) {
+        WebElement field = getInputField(labelText);
+        field.sendKeys(value);
+    }
+
+    public void fillCitizenData(String lastName, String firstName, String middleName,
+                                String dateOfBirth, String numberOfPassports, String gender, String residenceAddress) {
+        fillField(FORM_LASTNAME, lastName);
+        fillField(FORM_FIRSTNAME, firstName);
+        fillField(FORM_MIDDLENAME, middleName);
+        fillField(FORM_DATEOFBIRTH, dateOfBirth);
+        fillField(FORM_PASSPORT, numberOfPassports);
+        fillField(FORM_GENDER, gender);
+        fillField(FORM_ADDRESS, residenceAddress);
+    }
+
+    public void clickButton(String buttonText) {
+        getButton(buttonText).click();
     }
 }

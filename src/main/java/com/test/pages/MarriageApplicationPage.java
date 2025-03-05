@@ -1,45 +1,49 @@
 package com.test.pages;
 
 import com.test.models.MarriageData;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 public class MarriageApplicationPage {
 
-    @FindBy(xpath = "//div[label[contains(text(), 'Дата регистрации')]]/following-sibling::input")
-    private WebElement dateOfRegistrationField;
-    @FindBy(xpath = "//div[label[contains(text(), 'Новая фамилия')]]/following-sibling::input")
-    private WebElement newFamilyField;
-    @FindBy(xpath = "//div[label[contains(text(), 'Фамилия супруга')]]/following-sibling::input")
-    private WebElement lastNameOfSpouseField;
-    @FindBy(xpath = "//div[label[contains(text(), 'Имя супруга')]]/following-sibling::input")
-    private WebElement firstNameOfSpouseField;
-    @FindBy(xpath = "//div[label[contains(text(), 'Отчество супруга')]]/following-sibling::input")
-    private WebElement middleNameOfSpouseField;
-    @FindBy(xpath = "//div[label[contains(text(), 'Дата рождения супруга')]]/following-sibling::input")
-    private WebElement dateOfBirthOfSpouseField;
-    @FindBy(xpath = "//div[label[contains(text(), 'Номер паспорта супруга')]]/following-sibling::input")
-    private WebElement passportNumberOfSpouseField;
-    @FindBy(xpath = "//button[contains(text(), 'Завершить')]")
-    private WebElement finishButton;
+    private WebDriver driver;
+
+    private static final String INPUT_FIELD_XPATH = "//div[label[contains(text(), '%s')]]/following-sibling::input";
+    private static final String BUTTON_XPATH = "//button[contains(text(), '%s')]";
 
     public MarriageApplicationPage(WebDriver driver) {
+        this.driver = driver;
         PageFactory.initElements(driver, this);
     }
 
-    public void fillApplicationData(MarriageData marriageData) {
-        dateOfRegistrationField.sendKeys(marriageData.getDateOfRegistration());
-        newFamilyField.sendKeys(marriageData.getNewFamily());
-        lastNameOfSpouseField.sendKeys(marriageData.getLastNameOfSpouse());
-        firstNameOfSpouseField.sendKeys(marriageData.getFirstNameOfSpouse());
-        middleNameOfSpouseField.sendKeys(marriageData.getMiddleNameOfSpouse());
-        dateOfBirthOfSpouseField.sendKeys(marriageData.getDateOfBirthOfSpouse());
-        passportNumberOfSpouseField.sendKeys(marriageData.getPassportNumberOfSpouse());
+    private WebElement getInputField(String labelText) {
+        String xpath = String.format(INPUT_FIELD_XPATH, labelText);
+        return driver.findElement(By.xpath(xpath));
     }
 
-    public void submitApplication() {
-        finishButton.click();
+    private WebElement getButton(String buttonText) {
+        String xpath = String.format(BUTTON_XPATH, buttonText);
+        return driver.findElement(By.xpath(xpath));
+    }
+
+    public void fillField(String labelText, String value) {
+        WebElement field = getInputField(labelText);
+        field.sendKeys(value);
+    }
+
+    public void fillApplicationData(MarriageData marriageData) {
+        fillField("Дата регистрации", marriageData.getDateOfRegistration());
+        fillField("Новая фамилия", marriageData.getNewLastName());
+        fillField("Фамилия супруга", marriageData.getLastNameOfSpouse());
+        fillField("Имя супруга", marriageData.getFirstNameOfSpouse());
+        fillField("Отчество супруга", marriageData.getMiddleNameOfSpouse());
+        fillField("Дата рождения супруга", marriageData.getDateOfBirthOfSpouse());
+        fillField("Номер паспорта супруга", marriageData.getPassportNumberOfSpouse());
+    }
+
+    public void clickButton(String buttonText) {
+        getButton(buttonText).click();
     }
 }

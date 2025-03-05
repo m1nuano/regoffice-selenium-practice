@@ -7,6 +7,8 @@ import org.openqa.selenium.WebElement;
 
 import java.time.Duration;
 
+import static com.test.constants.TestConstants.*;
+
 public class AdminTableRows {
     private WebElement rowElement;
     private Waiters waiters;
@@ -18,8 +20,6 @@ public class AdminTableRows {
     private static final By APPLICATION_STATUS = By.cssSelector("td:nth-of-type(5)");
 
     private static final String BUTTON_LOCATOR_TEMPLATE = "td:nth-of-type(6) button svg[data-testid='%s']";
-    private static final String APPROVE_ICON = "ThumbUpIcon";
-    private static final String REJECT_ICON = "ThumbDownIcon";
 
     public AdminTableRows(WebDriver driver, WebElement rowElement) {
         this.rowElement = rowElement;
@@ -46,17 +46,9 @@ public class AdminTableRows {
         return rowElement.findElement(APPLICATION_STATUS).getText();
     }
 
-    public void approve() {
-        performAction(APPROVE_ICON, "Одобрена");
-    }
-
-    public void reject() {
-        performAction(REJECT_ICON, "Отклонена");
-    }
-
-    private void performAction(String actionType, String expectedStatus) {
+    public void performAction(String actionType, String expectedStatus) {
         By buttonLocator = By.cssSelector(String.format(BUTTON_LOCATOR_TEMPLATE, actionType));
         rowElement.findElement(buttonLocator).click();
-        waiters.waitForStatusChange(APPLICATION_STATUS, expectedStatus, Duration.ofSeconds(10));
+        waiters.waitForTextAppears(APPLICATION_STATUS, expectedStatus, Duration.ofSeconds(LONG_INTERVAL));
     }
 }

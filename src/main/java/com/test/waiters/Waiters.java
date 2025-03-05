@@ -2,10 +2,12 @@ package com.test.waiters;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.List;
 
 public class Waiters {
 
@@ -16,13 +18,14 @@ public class Waiters {
         this.driver = driver;
     }
 
-    public void waitForStatusChange(By element, String expectedElement, Duration duration) {
+    public void waitForTextAppears(By element, String expectedText, Duration duration) {
         wait = new WebDriverWait(driver, duration);
-        wait.until(ExpectedConditions.textToBePresentInElementLocated(element, expectedElement));
+        wait.until(ExpectedConditions.textToBePresentInElementLocated(element, expectedText));
     }
 
-    public void waitForElementToBeVisible(By element, Duration duration) {
+    public List<WebElement> waitForElementsToBeVisible(By elementLocation, Duration duration) {
         wait = new WebDriverWait(driver, duration);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(element));
+        wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(elementLocation));
+        return driver.findElements(elementLocation);
     }
 }

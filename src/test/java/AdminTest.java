@@ -1,47 +1,62 @@
 import com.test.components.AdminTableRows;
-import com.test.constants.TestConstants;
+import com.test.models.BirthData;
 import com.test.pages.AdminTablePage;
-import com.test.pages.MainPage;
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import java.util.List;
 
-public class AdminTest extends BaseAdminTest implements TestConstants {
+import static com.test.constants.TestConstants.*;
 
-    @Test
-    public void testAdminTable() {
-        AdminTableRows adminTableRows = getAdminTableRows();
-        System.out.println("Номер заявки: " + adminTableRows.getRequestNumber());
-        System.out.println("Заявитель: " + adminTableRows.getApplicantName());
-        System.out.println("Тип: " + adminTableRows.getApplicationType());
-        System.out.println("Время: " + adminTableRows.getApplicationTime());
-        System.out.println("Статус: " + adminTableRows.getApplicationStatus());
+public class AdminTest extends BaseTest {
+    String applicationNumber;
 
-        Assert.assertEquals(adminTableRows.getRequestNumber(), applicationNumber);
-    }
+    @BeforeMethod
+    public void setUp() {
+        mainPageSteps.chooseRole(TEST_USERROLE);
+        applicantPageSteps.fillApplicantFormPage(TEST_NAME, TEST_NAME, TEST_NAME, TEST_PHONE, TEST_PASSPORT, TEST_ADDRESS);
+        typeOfApplicationSteps.chooseApplication(APP_BIRTH);
+        citizenSteps.fillCitizenFormPage(TEST_NAME, TEST_NAME, TEST_NAME, TEST_DATE, TEST_PASSPORT, TEST_GENDER, TEST_ADDRESS);
+        BirthData birthData = new BirthData(TEST_ADDRESS, TEST_NAME, TEST_NAME, TEST_NAME, TEST_NAME);
+        birthAppSteps.fillBirthApplicationPage(birthData);
 
-    @Test
-    public void testAdminChangeApplicationStatus() {
-        AdminTableRows row = getAdminTableRows();
+        appStatusSteps.performAction(BUTTON_CLOSE);
+        mainPageSteps.chooseRole(TEST_ADMINROLE);
 
-        row.approve();
-        String approvedStatus = row.getApplicationStatus();
-        Assert.assertEquals("Одобрена", approvedStatus, "Статус заявки был изменён на 'Одобрена'");
-
-        row.reject();
-        String rejectedStatus = row.getApplicationStatus();
-        Assert.assertEquals("Отклонена", rejectedStatus, "Статус заявки был изменён на 'Отклонена'");
-    }
-
-    private AdminTableRows getAdminTableRows() {
-        MainPage mainPage = new MainPage(driver);
-        mainPage.loginAsAdmin();
+        adminPageSteps.fillAdminFormPage(TEST_NAME, TEST_NAME, TEST_NAME, TEST_PHONE, TEST_PASSPORT, TEST_DATE);
 
         AdminTablePage adminTable = new AdminTablePage(driver);
         List<AdminTableRows> rowsList = adminTable.getAllRequestRows();
+        AdminTableRows adminTableRows = rowsList.get(0);
+        applicationNumber = adminTableRows.getRequestNumber();
+    }
 
-        AdminTableRows row = rowsList.get(0);
-        return row;
+    @Test
+    public void testAdminTable() {
+        AdminTableRows row = adminTableSteps.getFirstRow();
+        String requestNumber = row.getRequestNumber();
+
+        Assert.assertEquals(requestNumber, applicationNumber);
+    }
+
+    @Test(dataProvider = "applicationActions")
+    public void testAdminChangeApplicationStatus(String actionType, String expectedStatus) {
+        AdminTableRows row = adminTableSteps.getFirstRow();
+
+        row.performAction(actionType, expectedStatus);
+
+        String actualStatus = row.getApplicationStatus();
+        Assert.assertEquals(actualStatus, expectedStatus);
+    }
+
+
+    @DataProvider(name = "applicationActions")
+    public Object[][] applicationActions() {
+        return new Object[][] {
+                {APPROVE_APP, "Одобрена"},
+                {REJECT_APP, "Отклонена"}
+        };
     }
 }

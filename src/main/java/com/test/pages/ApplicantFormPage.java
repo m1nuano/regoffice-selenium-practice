@@ -1,42 +1,50 @@
 package com.test.pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+
+import static com.test.constants.TestConstants.*;
 
 public class ApplicantFormPage {
 
-    @FindBy(xpath = "//div[label[contains(text(), 'Фамилия')]]/following-sibling::input")
-    private WebElement lastNameField;
-    @FindBy(xpath = "//div[label[contains(text(), 'Имя')]]/following-sibling::input")
-    private WebElement firstNameField;
-    @FindBy(xpath = "//div[label[contains(text(), 'Отчество')]]/following-sibling::input")
-    private WebElement middleNameField;
-    @FindBy(xpath = "//div[label[contains(text(), 'Телефон')]]/following-sibling::input")
-    private WebElement telephoneField;
-    @FindBy(xpath = "//div[label[contains(text(), 'Номер паспорта')]]/following-sibling::input")
-    private WebElement passportField;
-    @FindBy(xpath = "//div[label[contains(text(), 'Адрес прописки')]]/following-sibling::input")
-    private WebElement addressField;
-    @FindBy(xpath = "//button[contains(text(), 'Далее')]")
-    private WebElement nextButton;
+    private WebDriver driver;
+
+    private static final String INPUT_FIELD_XPATH = "//div[label[contains(text(), '%s')]]/following-sibling::input";
+    private static final String BUTTON_XPATH = "//button[contains(text(), '%s')]";
 
     public ApplicantFormPage(WebDriver driver) {
+        this.driver = driver;
         PageFactory.initElements(driver, this);
+    }
+
+    private WebElement getInputField(String labelText) {
+        String xpath = String.format(INPUT_FIELD_XPATH, labelText);
+        return driver.findElement(By.xpath(xpath));
+    }
+
+    private WebElement getButton(String buttonText) {
+        String xpath = String.format(BUTTON_XPATH, buttonText);
+        return driver.findElement(By.xpath(xpath));
+    }
+
+    public void fillField(String labelText, String value) {
+        WebElement field = getInputField(labelText);
+        field.sendKeys(value);
     }
 
     public void fillApplicantData(String lastName, String firstName, String middleName,
                                   String telephone, String passport, String address) {
-        lastNameField.sendKeys(lastName);
-        firstNameField.sendKeys(firstName);
-        middleNameField.sendKeys(middleName);
-        telephoneField.sendKeys(telephone);
-        passportField.sendKeys(passport);
-        addressField.sendKeys(address);
+        fillField(FORM_LASTNAME, lastName);
+        fillField(FORM_FIRSTNAME, firstName);
+        fillField(FORM_MIDDLENAME, middleName);
+        fillField(FORM_PHONE, telephone);
+        fillField(FORM_PASSPORT, passport);
+        fillField(FORM_ADDRESS, address);
     }
 
-    public void clickNext() {
-        nextButton.click();
+    public void clickButton(String buttonText) {
+        getButton(buttonText).click();
     }
 }

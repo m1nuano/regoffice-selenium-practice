@@ -7,7 +7,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class MarriageData {
     private final String dateOfRegistration;
-    private final String newFamily;
+    private final String newLastName;
     private final String lastNameOfSpouse;
     private final String firstNameOfSpouse;
     private final String middleNameOfSpouse;
