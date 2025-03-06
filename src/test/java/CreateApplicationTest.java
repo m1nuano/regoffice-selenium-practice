@@ -9,7 +9,7 @@ import java.time.Duration;
 
 public class CreateApplicationTest {
 
-    @Test
+    @Test(enabled = false)
     void CreateMarriageApplication(){
         String username = System.getenv("APP_USERNAME");
         String password = System.getenv("APP_PASSWORD");

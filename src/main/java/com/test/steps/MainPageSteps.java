@@ -1,6 +1,7 @@
 package com.test.steps;
 
 import com.test.pages.MainPage;
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 
 public class MainPageSteps {
@@ -10,6 +11,7 @@ public class MainPageSteps {
         mainPage = new MainPage(driver);
     }
 
+    @Step("Login into system as {role}")
     public MainPage chooseRole(String role) {
         mainPage.loginAs(role);
         return mainPage;

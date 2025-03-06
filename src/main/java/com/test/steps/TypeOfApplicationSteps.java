@@ -1,6 +1,7 @@
 package com.test.steps;
 
 import com.test.pages.TypeOfApplicationPage;
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 
 public class TypeOfApplicationSteps {
@@ -10,6 +11,7 @@ public class TypeOfApplicationSteps {
         typeOfApplicationPage = new TypeOfApplicationPage(driver);
     }
 
+    @Step("choosing '{application}'")
     public TypeOfApplicationPage chooseApplication(String application) {
         typeOfApplicationPage.chooseApplicationType(application);
         return typeOfApplicationPage;

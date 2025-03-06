@@ -1,6 +1,8 @@
 import com.test.models.BirthData;
 import com.test.models.DeathData;
 import com.test.models.MarriageData;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -8,6 +10,8 @@ import static com.test.constants.TestConstants.*;
 
 public class CreateEveryApplicationTest extends BaseTest{
 
+    @Epic("Application creation tests")
+    @Feature("Marriage application creation")
     @Test
     public void testCreateMarriageApplication() {
         mainPageSteps.chooseRole(TEST_USERROLE);
@@ -24,6 +28,8 @@ public class CreateEveryApplicationTest extends BaseTest{
         Assert.assertTrue(appStatusSteps.checkAppStatusIsPresent());
     }
 
+    @Epic("Application creation tests")
+    @Feature("Birth application creation")
     @Test
     public void testCreateBirthApplication() {
         mainPageSteps.chooseRole(TEST_USERROLE);
@@ -39,6 +45,9 @@ public class CreateEveryApplicationTest extends BaseTest{
 
         Assert.assertTrue(appStatusSteps.checkAppStatusIsPresent());
     }
+
+    @Epic("Application creation tests")
+    @Feature("Death application creation")
     @Test
     public void testCreateDeathApplication() {
         mainPageSteps.chooseRole(TEST_USERROLE);

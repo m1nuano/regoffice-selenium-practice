@@ -1,5 +1,7 @@
 import com.test.components.AdminTableRows;
 import com.test.models.BirthData;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
@@ -28,6 +30,8 @@ public class AdminTest extends BaseTest {
         applicationNumber = adminTableRows.getRequestNumber();
     }
 
+    @Epic("Admin table tests")
+    @Feature("Test of the last application for display in the table")
     @Test
     public void testAdminTable() {
         AdminTableRows row = adminTableSteps.getFirstRow();
@@ -36,6 +40,8 @@ public class AdminTest extends BaseTest {
         Assert.assertEquals(requestNumber, applicationNumber);
     }
 
+    @Epic("Admin table tests")
+    @Feature("Checking a change in application status")
     @Test(dataProvider = "applicationStatusChanges")
     public void testAdminChangeApplicationStatus(String actionType, String expectedStatus) {
         AdminTableRows row = adminTableSteps.getFirstRow();
