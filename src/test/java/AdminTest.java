@@ -1,20 +1,17 @@
 import com.test.components.AdminTableRows;
 import com.test.models.BirthData;
-import com.test.pages.AdminTablePage;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import java.util.List;
-
 import static com.test.constants.TestConstants.*;
 
 public class AdminTest extends BaseTest {
-    String applicationNumber;
+    private String applicationNumber;
 
     @BeforeMethod
-    public void setUp() {
+    public void createBirthApplication() {
         mainPageSteps.chooseRole(TEST_USERROLE);
         applicantPageSteps.fillApplicantFormPage(TEST_NAME, TEST_NAME, TEST_NAME, TEST_PHONE, TEST_PASSPORT, TEST_ADDRESS);
         typeOfApplicationSteps.chooseApplication(APP_BIRTH);
@@ -27,9 +24,7 @@ public class AdminTest extends BaseTest {
 
         adminPageSteps.fillAdminFormPage(TEST_NAME, TEST_NAME, TEST_NAME, TEST_PHONE, TEST_PASSPORT, TEST_DATE);
 
-        AdminTablePage adminTable = new AdminTablePage(driver);
-        List<AdminTableRows> rowsList = adminTable.getAllRequestRows();
-        AdminTableRows adminTableRows = rowsList.get(0);
+        AdminTableRows adminTableRows = adminTableSteps.getFirstRow();
         applicationNumber = adminTableRows.getRequestNumber();
     }
 
@@ -41,7 +36,7 @@ public class AdminTest extends BaseTest {
         Assert.assertEquals(requestNumber, applicationNumber);
     }
 
-    @Test(dataProvider = "applicationActions")
+    @Test(dataProvider = "applicationStatusChanges")
     public void testAdminChangeApplicationStatus(String actionType, String expectedStatus) {
         AdminTableRows row = adminTableSteps.getFirstRow();
 
@@ -52,8 +47,8 @@ public class AdminTest extends BaseTest {
     }
 
 
-    @DataProvider(name = "applicationActions")
-    public Object[][] applicationActions() {
+    @DataProvider(name = "applicationStatusChanges")
+    public Object[][] applicationStatusChanges() {
         return new Object[][] {
                 {APPROVE_APP, "Одобрена"},
                 {REJECT_APP, "Отклонена"}

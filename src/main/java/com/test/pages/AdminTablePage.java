@@ -14,7 +14,7 @@ import static com.test.constants.TestConstants.LONG_INTERVAL;
 
 public class AdminTablePage {
 
-    private static final By elementsLocation = By.cssSelector("tr:not(.MuiTableRow-head)");
+    private static final By tableRows = By.cssSelector("tr:not(.MuiTableRow-head)");
 
     private WebDriver driver;
     private Waiters waiters;
@@ -25,7 +25,7 @@ public class AdminTablePage {
     }
 
     public List<AdminTableRows> getAllRequestRows() {
-        List<WebElement> rows = waiters.waitForElementsToBeVisible(elementsLocation, Duration.ofSeconds(LONG_INTERVAL));
+        List<WebElement> rows = waiters.waitForElementsToBeVisible(tableRows, Duration.ofSeconds(LONG_INTERVAL));
         return rows.stream()
                 .map(row -> new AdminTableRows(driver, row))
                 .collect(Collectors.toList());

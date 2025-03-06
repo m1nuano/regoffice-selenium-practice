@@ -17,7 +17,7 @@ public class ApplicationStatusPage {
         PageFactory.initElements(driver, this);
     }
 
-    private WebElement getText() {
+    private WebElement getRequestNumber() {
         return driver.findElement(By.xpath(NUMBER_OF_APPLICATION));
     }
 
@@ -27,7 +27,7 @@ public class ApplicationStatusPage {
     }
 
     public boolean isApplicationNumberVisible() {
-        return getText().isDisplayed();
+        return getRequestNumber().isDisplayed();
     }
 
     public void clickButton(String buttonText) {
