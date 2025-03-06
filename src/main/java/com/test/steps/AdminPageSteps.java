@@ -13,7 +13,13 @@ public class AdminPageSteps {
         adminFormPage = new AdminFormPage(driver);
     }
 
-    @Step("filling admin form page with correct values")
+    @Step("Filling admin form page with correct values: " +
+            "last name: '{lastName}', " +
+            "first name: '{firstName}', " +
+            "middle name: '{middleName}', " +
+            "telephone number: '{telephone}', " +
+            "passport number: '{passport}', " +
+            "date of birth: '{dateOfBirth}'")
     public AdminFormPage fillAdminFormPage(String lastName, String firstName, String middleName,
                                            String telephone, String passport, String dateOfBirth) {
         adminFormPage.fillAdminData(

@@ -14,7 +14,7 @@ public class BirthAppSteps {
         birthApplicationPage = new BirthApplicationPage(driver);
     }
 
-    @Step("filling birth_application form page with correct values")
+    @Step("Filling birth application form page with correct values")
     public BirthApplicationPage fillBirthApplicationPage(BirthData birthData) {
         birthApplicationPage.fillBirthApplicationData(birthData);
         birthApplicationPage.clickButton(BUTTON_FINISH);

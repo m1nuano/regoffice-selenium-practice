@@ -14,7 +14,7 @@ public class MarriageAppSteps {
         marriageApplicationPage = new MarriageApplicationPage(driver);
     }
 
-    @Step("filling marriage_application form page with correct values")
+    @Step("Filling marriage application form page with correct values")
     public MarriageApplicationPage fillMarriageApplicationPage(MarriageData marriageData) {
         marriageApplicationPage.fillApplicationData(marriageData);
         marriageApplicationPage.clickButton(BUTTON_FINISH);

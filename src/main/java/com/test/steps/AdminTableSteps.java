@@ -18,7 +18,7 @@ public class AdminTableSteps {
         return adminTablePage.getAllRequestRows();
     }
 
-    @Step("getting first row")
+    @Step("Getting first row from admin table")
     public AdminTableRows getFirstRow() {
         return adminTablePage.getAllRequestRows().get(0);
     }

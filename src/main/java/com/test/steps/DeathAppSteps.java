@@ -14,7 +14,7 @@ public class DeathAppSteps {
         deathApplicationPage = new DeathApplicationPage(driver);
     }
 
-    @Step("filling death_application form page with correct values")
+    @Step("Filling death application form page with correct values")
     public DeathApplicationPage fillDeathApplicationPage(DeathData deathData) {
         deathApplicationPage.fillDeathApplicationData(deathData);
         deathApplicationPage.clickButton(BUTTON_FINISH);

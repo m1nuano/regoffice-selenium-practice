@@ -1,5 +1,6 @@
 package com.test.pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -17,6 +18,7 @@ public class TypeOfApplicationPage {
         PageFactory.initElements(driver, this);
     }
 
+    @Step("Find the button '{type}' by xpath")
     public void chooseApplicationType(String type) {
         String xpath = String.format(BUTTON_XPATH, type);
         WebElement button = driver.findElement(By.xpath(xpath));

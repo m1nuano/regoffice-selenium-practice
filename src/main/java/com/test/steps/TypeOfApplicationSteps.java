@@ -11,7 +11,7 @@ public class TypeOfApplicationSteps {
         typeOfApplicationPage = new TypeOfApplicationPage(driver);
     }
 
-    @Step("choosing '{application}'")
+    @Step("Choosing '{application}'")
     public TypeOfApplicationPage chooseApplication(String application) {
         typeOfApplicationPage.chooseApplicationType(application);
         return typeOfApplicationPage;

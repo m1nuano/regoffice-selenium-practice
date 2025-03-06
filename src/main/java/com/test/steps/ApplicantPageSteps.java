@@ -13,7 +13,13 @@ public class ApplicantPageSteps {
         applicantFormPage = new ApplicantFormPage(driver);
     }
 
-    @Step("filling applicant form page with correct values")
+    @Step("Filling applicant form page with correct values: " +
+            "last name: '{lastName}', " +
+            "first name: '{firstName}', " +
+            "middle name: '{middleName}', " +
+            "telephone number: '{telephone}', " +
+            "passport number: '{passport}', " +
+            "address: '{address}'")
     public ApplicantFormPage fillApplicantFormPage(String lastName, String firstName, String middleName,
                                                    String telephone, String passport, String address){
         applicantFormPage.fillApplicantData(

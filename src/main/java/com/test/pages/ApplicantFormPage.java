@@ -1,5 +1,6 @@
 package com.test.pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -29,6 +30,7 @@ public class ApplicantFormPage {
         return driver.findElement(By.xpath(xpath));
     }
 
+    @Step("Filling applicant form: {labelText}: '{value}'")
     public void fillField(String labelText, String value) {
         WebElement field = getInputField(labelText);
         field.sendKeys(value);
@@ -44,6 +46,7 @@ public class ApplicantFormPage {
         fillField(FORM_ADDRESS, address);
     }
 
+    @Step("Clicking the '{buttonText}' button")
     public void clickButton(String buttonText) {
         getButton(buttonText).click();
     }

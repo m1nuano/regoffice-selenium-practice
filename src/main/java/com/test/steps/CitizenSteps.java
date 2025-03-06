@@ -13,7 +13,14 @@ public class CitizenSteps {
         citizenFormPage = new CitizenFormPage(driver);
     }
 
-    @Step("filling citizen form page with correct values")
+    @Step("Filling citizen form page with correct values: " +
+            "last name: '{lastName}', " +
+            "first name: '{firstName}', " +
+            "middle name: '{middleName}', " +
+            "date of birth: '{dateOfBirth}', " +
+            "passport number: '{numberOfPassports}', " +
+            "gender: '{gender}', " +
+            "address: '{residenceAddress}'")
     public CitizenFormPage fillCitizenFormPage(String lastName, String firstName, String middleName,
                                                String dateOfBirth, String numberOfPassports, String gender, String residenceAddress) {
         citizenFormPage.fillCitizenData(

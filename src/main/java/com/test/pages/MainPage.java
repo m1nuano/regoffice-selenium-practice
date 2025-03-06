@@ -1,5 +1,6 @@
 package com.test.pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -16,6 +17,7 @@ public class MainPage {
         PageFactory.initElements(driver, this);
     }
 
+    @Step("Find the button '{role}' by xpath")
     public void loginAs(String role) {
         String xpath = String.format(BUTTON_XPATH, role);
         WebElement button = driver.findElement(By.xpath(xpath));
