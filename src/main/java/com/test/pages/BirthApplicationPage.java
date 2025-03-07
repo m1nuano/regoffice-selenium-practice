@@ -1,6 +1,7 @@
 package com.test.pages;
 
 import com.test.models.BirthData;
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -28,6 +29,7 @@ public class BirthApplicationPage {
         return driver.findElement(By.xpath(xpath));
     }
 
+    @Step("Filling birth application data: {labelText}: '{value}'")
     public void fillField(String labelText, String value) {
         WebElement field = getInputField(labelText);
         field.sendKeys(value);
@@ -41,6 +43,7 @@ public class BirthApplicationPage {
         fillField("Дедушка", birthData.getGrandpa());
     }
 
+    @Step("Clicking the '{buttonText}' button")
     public void clickButton(String buttonText) {
         getButton(buttonText).click();
     }

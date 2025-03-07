@@ -1,13 +1,17 @@
 import com.test.drivers.WebDriverSingleton;
 import com.test.steps.*;
+import com.test.utils.TestListener;
 import org.openqa.selenium.WebDriver;
+import org.testng.ITestContext;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Listeners;
 
 import java.time.Duration;
 
 import static com.test.constants.TestConstants.MID_INTERVAL;
 
+@Listeners(TestListener.class)
 public class BaseTest {
     WebDriver driver;
 
@@ -23,12 +27,12 @@ public class BaseTest {
     TypeOfApplicationSteps typeOfApplicationSteps;
 
     @BeforeMethod
-    public void setup() {
+    public void setup(ITestContext context) {
         String username = System.getenv("APP_USERNAME");
         String password = System.getenv("APP_PASSWORD");
         String baseUrl = "https://%s:%s@regoffice.senla.eu/";
         String formattedUrl = String.format(baseUrl, username, password);
-        driver = WebDriverSingleton.getDriver();
+        driver = WebDriverSingleton.getDriver(context);
         driver.get(formattedUrl);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(MID_INTERVAL));
         initSteps();

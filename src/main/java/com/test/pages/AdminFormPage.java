@@ -1,5 +1,6 @@
 package com.test.pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -34,6 +35,13 @@ public class AdminFormPage {
         field.sendKeys(value);
     }
 
+    @Step("Filling admin form with values:: " +
+            "last name: '{lastName}', " +
+            "first name: '{firstName}', " +
+            "middle name: '{middleName}', " +
+            "telephone number: '{telephone}', " +
+            "passport number: '{passport}', " +
+            "date of birth: '{dateOfBirth}'")
     public void fillAdminData(String lastName, String firstName, String middleName,
                               String telephone, String passport, String dateOfBirth) {
         fillField(FORM_LASTNAME, lastName);
@@ -44,6 +52,7 @@ public class AdminFormPage {
         fillField(FORM_DATEOFBIRTH, dateOfBirth);
     }
 
+    @Step("Clicking '{buttonText} button'")
     public void clickButton(String buttonText) {
         getButton(buttonText).click();
     }

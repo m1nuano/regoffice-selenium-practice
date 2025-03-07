@@ -2,6 +2,7 @@ package com.test.pages;
 
 import com.test.components.AdminTableRows;
 import com.test.waiters.Waiters;
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -24,6 +25,7 @@ public class AdminTablePage {
         this.waiters = new Waiters(driver);
     }
 
+    @Step("Getting all request rows")
     public List<AdminTableRows> getAllRequestRows() {
         List<WebElement> rows = waiters.waitForElementsToBeVisible(tableRows, Duration.ofSeconds(LONG_INTERVAL));
         return rows.stream()

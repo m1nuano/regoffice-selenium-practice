@@ -1,6 +1,7 @@
 package com.test.components;
 
 import com.test.waiters.Waiters;
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -26,26 +27,32 @@ public class AdminTableRows {
         this.waiters = new Waiters(driver);
     }
 
+    @Step("Getting application number from row of table")
     public String getRequestNumber() {
         return rowElement.findElement(REQUEST_NUMBER).getText();
     }
 
+    @Step("Getting applicant name from row of table")
     public String getApplicantName() {
         return rowElement.findElement(APPLICANT_NAME).getText();
     }
 
+    @Step("Getting application type from row of table")
     public String getApplicationType() {
         return rowElement.findElement(APPLICATION_TYPE).getText();
     }
 
+    @Step("Getting application creation time from row of table")
     public String getApplicationTime() {
         return rowElement.findElement(APPLICATION_TIME).getText();
     }
 
+    @Step("Getting application status from row of table")
     public String getApplicationStatus() {
         return rowElement.findElement(APPLICATION_STATUS).getText();
     }
 
+    @Step("Choosing action '{actionType}' and choosing expected status '{expectedStatus}' for application")
     public void performAction(String actionType, String expectedStatus) {
         By buttonLocator = By.cssSelector(String.format(BUTTON_LOCATOR_TEMPLATE, actionType));
         rowElement.findElement(buttonLocator).click();
