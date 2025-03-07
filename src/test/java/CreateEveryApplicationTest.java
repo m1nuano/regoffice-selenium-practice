@@ -1,10 +1,12 @@
 import com.test.models.BirthData;
 import com.test.models.DeathData;
 import com.test.models.MarriageData;
+import com.test.utils.TestListener;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Step;
 import org.testng.Assert;
+import org.testng.ITestResult;
 import org.testng.annotations.Test;
 
 import static com.test.constants.TestConstants.*;
@@ -27,7 +29,8 @@ public class CreateEveryApplicationTest extends BaseTest{
         MarriageData marriageData = new MarriageData(TEST_DATE, TEST_LASTNAME, TEST_NAME, TEST_NAME, TEST_NAME, TEST_DATE, TEST_PASSPORT);
         marriageAppSteps.fillMarriageApplicationPage(marriageData);
 
-        Assert.assertTrue(appStatusSteps.checkAppStatusIsPresent());
+        Assert.assertTrue(!appStatusSteps.checkAppStatusIsPresent());
+//        Assert.fail();
     }
 
     @Epic("Application creation tests")

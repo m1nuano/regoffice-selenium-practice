@@ -14,12 +14,12 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
         <selenium.version>4.19.1</selenium.version>
-        <webdriver-manager.version>5.8.0</webdriver-manager.version>
-        <testng.version>7.10.2</testng.version>
+        <webdriver-manager.version>5.9.2</webdriver-manager.version>
+        <testng.version>7.4.0</testng.version>
         <lombok.version>1.18.30</lombok.version>
         <allure.version>2.29.1</allure.version>
         <maven-surefire-plugin.version>3.5.2</maven-surefire-plugin.version>
-        <aspectjweaver.version>1.9.22.1</aspectjweaver.version>
+        <aspectjweaver.version>1.9.22</aspectjweaver.version>
         <allure-maven-plugin.version>2.11.2</allure-maven-plugin.version>
     </properties>
 
@@ -40,7 +40,6 @@
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
             <version>${testng.version}</version>
-            <scope>test</scope>
         </dependency>
 
         <dependency>
@@ -55,6 +54,12 @@
             <artifactId>allure-testng</artifactId>
             <version>${allure.version}</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+            <version>${aspectjweaver.version}</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -64,10 +69,20 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>${maven-surefire-plugin.version}</version>
                 <configuration>
+<!--                    <suiteXmlFiles>-->
+<!--                        <suiteXmlFile>src/test/resources/regoffice-testng.xml</suiteXmlFile>-->
+<!--                    </suiteXmlFiles>-->
                     <argLine>
-                        -javaagent:${settings.localRepository}/org/aspectj/aspectjweaver/1.9.22.1/aspectjweaver-1.9.22.1.jar
+                        -javaagent:${settings.localRepository}/org/aspectj/aspectjweaver/1.9.22/aspectjweaver-1.9.22.jar
                         -Xmx256m
                     </argLine>
+                    <properties>
+                        <property>
+                            <name>TestListener</name>
+                            <value>com.test.utils.TestListener</value>
+                            <allure.results.directory>${project.build.directory}/target/allure-results</allure.results.directory>
+                        </property>
+                    </properties>
                 </configuration>
                 <dependencies>
                     <dependency>
