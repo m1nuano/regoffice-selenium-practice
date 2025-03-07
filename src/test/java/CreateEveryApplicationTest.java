@@ -29,8 +29,7 @@ public class CreateEveryApplicationTest extends BaseTest{
         MarriageData marriageData = new MarriageData(TEST_DATE, TEST_LASTNAME, TEST_NAME, TEST_NAME, TEST_NAME, TEST_DATE, TEST_PASSPORT);
         marriageAppSteps.fillMarriageApplicationPage(marriageData);
 
-        Assert.assertTrue(!appStatusSteps.checkAppStatusIsPresent());
-//        Assert.fail();
+        Assert.assertTrue(appStatusSteps.checkAppStatusIsPresent());
     }
 
     @Epic("Application creation tests")

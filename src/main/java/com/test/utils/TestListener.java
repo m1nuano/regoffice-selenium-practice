@@ -48,21 +48,6 @@ public class TestListener implements ITestListener {
         }
     }
 
-    @Override
-    public void onTestFailedButWithinSuccessPercentage(ITestResult result) {
-
-    }
-
-    @Override
-    public void onStart(ITestContext context) {
-
-    }
-
-    @Override
-    public void onFinish(ITestContext context) {
-
-    }
-
     private long getExecutionTime(ITestResult result){
         return result.getEndMillis() - result.getStartMillis();
     }

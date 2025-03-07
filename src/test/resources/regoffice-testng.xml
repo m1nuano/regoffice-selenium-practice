@@ -4,13 +4,11 @@
     <listeners>
         <listener class-name="com.test.utils.TestListener"/>
     </listeners>
-
     <test name="Admin Tests">
         <classes>
             <class name="AdminTest"/>
         </classes>
     </test>
-
     <test name="Application Tests">
         <classes>
             <class name="CreateEveryApplicationTest"/>
