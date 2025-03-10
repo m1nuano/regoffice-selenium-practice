@@ -1,13 +1,11 @@
+import com.test.models.AppData;
 import com.test.pojo.*;
 import com.test.steps.*;
-import com.test.models.AppData;
 import com.test.test_data.DataProviders;
-import com.test.utils.RequestResponseFilter;
 import com.test.utils.TestListener;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Step;
-import io.restassured.RestAssured;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
@@ -19,11 +17,7 @@ public class ApiTests {
 
     private Integer applicationId;
     private Integer staffId;
-
-//    static {
-//        RestAssured.filters(new RequestResponseFilter());
-//    }
-
+    
     @Epic("API")
     @Feature("Send user application request with '{mode}' mode")
     @Test(dataProvider = "sendEveryUserRequest", dataProviderClass = DataProviders.class)
