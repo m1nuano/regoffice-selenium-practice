@@ -1,0 +1,25 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "data": {
+      "type": "object",
+      "properties": {
+        "applicantid": { "type": "integer" },
+        "citizenid": { "type": "integer" },
+        "applicationid": { "type": "integer" },
+        "birthcertificateid": { "type": "integer" },
+        "merrigecertificateid": { "type": "integer" },
+        "deathcertificateid": { "type": "integer" }
+      },
+      "required": ["applicantid", "citizenid", "applicationid"],
+      "oneOf": [
+        { "required": ["birthcertificateid"] },
+        { "required": ["merrigecertificateid"] },
+        { "required": ["deathcertificateid"] }
+      ]
+    },
+    "requestId": { "type": "string" }
+  },
+  "required": ["data", "requestId"]
+}

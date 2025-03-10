@@ -1,4 +1,5 @@
 import com.test.drivers.WebDriverSingleton;
+import com.test.specifications.Specifications;
 import com.test.steps.*;
 import com.test.utils.TestListener;
 import org.openqa.selenium.WebDriver;
@@ -11,6 +12,7 @@ import java.time.Duration;
 
 import static com.test.constants.TestConstants.DRIVER_VARIABLE;
 import static com.test.constants.TestConstants.MID_INTERVAL;
+import static com.test.constants.UrlConstants.BASE_URL;
 
 @Listeners(TestListener.class)
 public class BaseTest {
@@ -31,8 +33,7 @@ public class BaseTest {
     public void setup(ITestContext context) {
         String username = System.getenv("APP_USERNAME");
         String password = System.getenv("APP_PASSWORD");
-        String baseUrl = "https://%s:%s@regoffice.senla.eu/";
-        String formattedUrl = String.format(baseUrl, username, password);
+        String formattedUrl = String.format(BASE_URL, username, password);
         driver = WebDriverSingleton.getDriver(context, DRIVER_VARIABLE);
         driver.get(formattedUrl);
         Duration duration = Duration.ofSeconds(MID_INTERVAL);
