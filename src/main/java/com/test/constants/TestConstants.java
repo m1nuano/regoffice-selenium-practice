@@ -35,4 +35,6 @@ public class TestConstants {
 
     public static final int MID_INTERVAL = 5;
     public static final int LONG_INTERVAL = 10;
+
+    public static final String DRIVER_VARIABLE = "Driver";
 }

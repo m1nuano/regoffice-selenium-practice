@@ -9,6 +9,7 @@ import org.testng.annotations.Listeners;
 
 import java.time.Duration;
 
+import static com.test.constants.TestConstants.DRIVER_VARIABLE;
 import static com.test.constants.TestConstants.MID_INTERVAL;
 
 @Listeners(TestListener.class)
@@ -32,9 +33,10 @@ public class BaseTest {
         String password = System.getenv("APP_PASSWORD");
         String baseUrl = "https://%s:%s@regoffice.senla.eu/";
         String formattedUrl = String.format(baseUrl, username, password);
-        driver = WebDriverSingleton.getDriver(context);
+        driver = WebDriverSingleton.getDriver(context, DRIVER_VARIABLE);
         driver.get(formattedUrl);
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(MID_INTERVAL));
+        Duration duration = Duration.ofSeconds(MID_INTERVAL);
+        driver.manage().timeouts().implicitlyWait(duration);
         initSteps();
     }
 

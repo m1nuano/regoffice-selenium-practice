@@ -1,17 +1,15 @@
 import com.test.models.BirthData;
 import com.test.models.DeathData;
 import com.test.models.MarriageData;
-import com.test.utils.TestListener;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Step;
 import org.testng.Assert;
-import org.testng.ITestResult;
 import org.testng.annotations.Test;
 
 import static com.test.constants.TestConstants.*;
 
-public class CreateEveryApplicationTest extends BaseTest{
+public class CreateEveryApplicationTest extends BaseTest {
 
     @Epic("Application creation tests")
     @Feature("Marriage application creation")
@@ -56,6 +54,7 @@ public class CreateEveryApplicationTest extends BaseTest{
     @Test
     @Step("Creating death application and checking this application is created")
     public void testCreateDeathApplication() {
+
         mainPageSteps.chooseRole(TEST_USERROLE);
 
         applicantPageSteps.fillApplicantFormPage(TEST_NAME, TEST_NAME, TEST_NAME, TEST_PHONE, TEST_PASSPORT, TEST_ADDRESS);
