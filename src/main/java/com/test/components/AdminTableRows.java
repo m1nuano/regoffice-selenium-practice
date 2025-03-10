@@ -72,8 +72,6 @@ public class AdminTableRows {
         try {
             rowElement.findElement(buttonLocator).click();
             log.info("Action button '{}' pressed", actionType);
-
-            log.info("Waiting for a change in status to '{}'", expectedStatus);
             waiters.waitForTextAppears(APPLICATION_STATUS, expectedStatus, Duration.ofSeconds(LONG_INTERVAL));
             log.info("The status is successfully changed to '{}'", expectedStatus);
         } catch (Exception e) {

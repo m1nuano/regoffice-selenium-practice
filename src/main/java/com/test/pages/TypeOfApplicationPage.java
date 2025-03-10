@@ -21,18 +21,11 @@ public class TypeOfApplicationPage {
         log.info("Type of application page is initialized");
     }
 
-    @Step("Find the button '{type}' by xpath")
+    @Step("Clicking the '{type}' button")
     public void chooseApplicationType(String type) {
         String xpath = String.format(BUTTON_XPATH, type);
-        log.info("Search for a button type of application: '{}'", type);
-
-        try {
-            WebElement button = driver.findElement(By.xpath(xpath));
-            log.info("Button '{}' is found. Clicking.", type);
-            button.click();
-        } catch (Exception e) {
-            log.error("Button '{}' is not found! XPath: {}", type, xpath, e);
-            throw e;
-        }
+        WebElement button = driver.findElement(By.xpath(xpath));
+        log.info("Button '{}' is found. Clicking.", type);
+        button.click();
     }
 }

@@ -31,7 +31,6 @@ public class AdminTablePage {
     @Step("Getting all request rows")
     public List<AdminTableRows> getAllRequestRows() {
         Duration duration = Duration.ofSeconds(LONG_INTERVAL);
-        log.info("Driver setting explicit wait to: {}", duration.getSeconds());
         List<WebElement> rows = waiters.waitForElementsToBeVisible(tableRows, duration);
         log.info("Number of  lines: {}", rows.size());
         return rows.stream()

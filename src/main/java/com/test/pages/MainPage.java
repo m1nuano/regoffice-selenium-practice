@@ -20,18 +20,11 @@ public class MainPage {
         log.info("Main page is initialized");
     }
 
-    @Step("Find the button '{role}' by xpath")
+    @Step("Clicking the '{role}' button")
     public void loginAs(String role) {
         String xpath = String.format(BUTTON_XPATH, role);
-        log.info("Search for the entry button for the role: '{}'", role);
-
-        try {
-            WebElement button = driver.findElement(By.xpath(xpath));
-            log.info("Button 'Войти как {}' is found. Clicking.", role);
-            button.click();
-        } catch (Exception e) {
-            log.error("Button 'Войти как {}' is not found! XPath: {}", role, xpath, e);
-            throw e;
-        }
+        WebElement button = driver.findElement(By.xpath(xpath));
+        log.info("Button 'Войти как {}' is found. Clicking.", role);
+        button.click();
     }
 }
