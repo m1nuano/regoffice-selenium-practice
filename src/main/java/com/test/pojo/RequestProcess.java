@@ -15,6 +15,5 @@ public class RequestProcess {
     private int applicationId;
     @JsonProperty("staffid")
     private int staffId;
-    @JsonProperty("actiobn")
     private String action;
 }

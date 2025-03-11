@@ -15,7 +15,7 @@ import static io.restassured.RestAssured.given;
 public class GetApplicationsSteps {
 
     @Step("Starting GET request to fetch all applications and getting response")
-    public static GetApplicationsResponse sendGetRequest() {
+    public static GetApplicationsResponse sendGetApplicationsRequest() {
         log.info("Starting GET request to fetch applications");
 
         GetApplicationsResponse response = given()

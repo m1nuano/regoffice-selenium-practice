@@ -11,15 +11,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class SendAdminRequest {
-    @JsonProperty("personalLastName")
     private String personalLastName;
-    @JsonProperty("personalFirstName")
     private String personalFirstName;
-    @JsonProperty("personalMiddleName")
     private String personalMiddleName;
-    @JsonProperty("personalPhoneNumber")
     private String personalPhoneNumber;
-    @JsonProperty("personalNumberOfPassport")
     private String personalNumberOfPassport;
     @JsonProperty("dateofbirth")
     private String dateOfBirth;

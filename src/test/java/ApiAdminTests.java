@@ -46,13 +46,12 @@ public class ApiAdminTests {
     @Test
     @Step("POST sendAdminRequest")
     public void testSendAdminRequest() {
-        SoftAssert softAssert = new SoftAssert();
-
         SendAdminRequest request = SendAdminSteps.createAdminRequest();
         SendAdminResponse response = SendAdminSteps.createAndValidateAdmin(request);
 
         staffId = response.getData().getStaffId();
 
+        SoftAssert softAssert = new SoftAssert();
         softAssert.assertNotNull(response.getData(), "Data cannot be null");
         softAssert.assertNotNull(response.getRequestId(), "RequestId cannot be null");
         softAssert.assertEquals(response.getRequestId().length(), 36, "RequestId must be UUID format");
@@ -62,13 +61,13 @@ public class ApiAdminTests {
 
     @Epic("API")
     @Feature("Send process request")
-    @Test(dependsOnMethods = {"testSendAdminRequest"})
+    @Test
     @Step("POST processRequest")
     public void testProcessRequest() {
-        SoftAssert softAssert = new SoftAssert();
-
         RequestProcess request = ProcessSteps.createProcessRequest(applicationId, staffId, "approved");
         ResponseProcess response = ProcessSteps.createAndValidateProcess(request);
+
+        SoftAssert softAssert = new SoftAssert();
 
         softAssert.assertNotNull(response.getData(), "Data cannot be null");
         softAssert.assertNotNull(response.getRequestId(), "RequestId cannot be null");
@@ -81,12 +80,12 @@ public class ApiAdminTests {
 
     @Epic("API")
     @Feature("Send get applications request")
-    @Test(dependsOnMethods = {"testSendAdminRequest"})
+    @Test
     @Step("GET getApplications")
     public void testGetApplications() {
-        SoftAssert softAssert = new SoftAssert();
+        GetApplicationsResponse response = GetApplicationsSteps.sendGetApplicationsRequest();
 
-        GetApplicationsResponse response = GetApplicationsSteps.sendGetRequest();
+        SoftAssert softAssert = new SoftAssert();
 
         softAssert.assertNotNull(response.getData(), "Data cannot be null");
         softAssert.assertNotNull(response.getRequestId(), "RequestId cannot be null");
@@ -99,12 +98,12 @@ public class ApiAdminTests {
 
     @Epic("API")
     @Feature("Send get application status request")
-    @Test(dependsOnMethods = {"testSendAdminRequest"})
+    @Test
     @Step("GET getApplicationStatus/applId")
     public void testGetApplicationStatus() {
-        SoftAssert softAssert = new SoftAssert();
-
         GetApplStatusResponse response = GetApplStatusSteps.createAndValidateStatus(applicationId);
+
+        SoftAssert softAssert = new SoftAssert();
 
         softAssert.assertNotNull(response.getData(), "Data cannot be null");
         softAssert.assertNotNull(response.getRequestId(), "Request ID cannot be null");

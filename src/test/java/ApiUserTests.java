@@ -18,10 +18,10 @@ public class ApiUserTests {
     @Test(dataProvider = "sendEveryUserRequest", dataProviderClass = DataProviders.class)
     @Step("POST sendUserRequest")
     public void testSendUserRequest(String mode, AppData data) {
-        SoftAssert softAssert = new SoftAssert();
-
         SendUserRequest request = SendUserSteps.createApplicationRequest(mode, data);
         SendUserResponse response = SendUserSteps.createAndValidateUser(request);
+
+        SoftAssert softAssert = new SoftAssert();
 
         softAssert.assertNotNull(response.getData(), "Data cannot be null");
         softAssert.assertEquals(response.getRequestId().length(), 36, "RequestId must be UUID format");
