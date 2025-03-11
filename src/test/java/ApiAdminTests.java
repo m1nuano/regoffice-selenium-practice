@@ -35,28 +35,40 @@ public class ApiAdminTests {
                 null
         );
 
-        SendUserRequest request = SendUserSteps.createApplicationRequest(MODE_BIRTH, data);
-        SendUserResponse response = SendUserSteps.createAndValidateUser(request);
+        SendUserRequest userRequest = SendUserSteps.createApplicationRequest(MODE_BIRTH, data);
+        SendUserResponse userResponse = SendUserSteps.createAndValidateUser(userRequest);
 
-        applicationId = response.getData().getApplicationid();
+        SendAdminRequest adminRequest = SendAdminSteps.createAdminRequest();
+        SendAdminResponse adminResponse = SendAdminSteps.createAndValidateAdmin(adminRequest);
+
+        applicationId = userResponse.getData().getApplicationid();
+        staffId = adminResponse.getData().getStaffId();
     }
 
-    @Epic("API")
-    @Feature("Send admin request")
-    @Test
-    @Step("POST sendAdminRequest")
+    @BeforeMethod
+    @Step("Create user application before admin tests")
     public void testSendAdminRequest() {
-        SendAdminRequest request = SendAdminSteps.createAdminRequest();
-        SendAdminResponse response = SendAdminSteps.createAndValidateAdmin(request);
+        AppData data = new AppData(
+                TEST_NAME,
+                TEST_PHONE,
+                TEST_PASSPORT,
+                TEST_ADDRESS,
+                TEST_DATE,
+                TEST_GENDER,
+                MODE_BIRTH,
+                new BirthData(TEST_ADDRESS, TEST_NAME, TEST_NAME, TEST_NAME, TEST_NAME),
+                null,
+                null
+        );
 
-        staffId = response.getData().getStaffId();
+        SendUserRequest userRequest = SendUserSteps.createApplicationRequest(MODE_BIRTH, data);
+        SendUserResponse userResponse = SendUserSteps.createAndValidateUser(userRequest);
 
-        SoftAssert softAssert = new SoftAssert();
-        softAssert.assertNotNull(response.getData(), "Data cannot be null");
-        softAssert.assertNotNull(response.getRequestId(), "RequestId cannot be null");
-        softAssert.assertEquals(response.getRequestId().length(), 36, "RequestId must be UUID format");
+        SendAdminRequest adminRequest = SendAdminSteps.createAdminRequest();
+        SendAdminResponse adminResponse = SendAdminSteps.createAndValidateAdmin(adminRequest);
 
-        softAssert.assertAll();
+        applicationId = userResponse.getData().getApplicationid();
+        staffId = adminResponse.getData().getStaffId();
     }
 
     @Epic("API")
@@ -68,7 +80,6 @@ public class ApiAdminTests {
         ResponseProcess response = ProcessSteps.createAndValidateProcess(request);
 
         SoftAssert softAssert = new SoftAssert();
-
         softAssert.assertNotNull(response.getData(), "Data cannot be null");
         softAssert.assertNotNull(response.getRequestId(), "RequestId cannot be null");
         softAssert.assertEquals(response.getRequestId().length(), 36, "RequestId must be UUID format");
@@ -86,7 +97,6 @@ public class ApiAdminTests {
         GetApplicationsResponse response = GetApplicationsSteps.sendGetApplicationsRequest();
 
         SoftAssert softAssert = new SoftAssert();
-
         softAssert.assertNotNull(response.getData(), "Data cannot be null");
         softAssert.assertNotNull(response.getRequestId(), "RequestId cannot be null");
         softAssert.assertEquals(response.getRequestId().length(), 36, "RequestId must be UUID format");
@@ -104,7 +114,6 @@ public class ApiAdminTests {
         GetApplStatusResponse response = GetApplStatusSteps.createAndValidateStatus(applicationId);
 
         SoftAssert softAssert = new SoftAssert();
-
         softAssert.assertNotNull(response.getData(), "Data cannot be null");
         softAssert.assertNotNull(response.getRequestId(), "Request ID cannot be null");
 

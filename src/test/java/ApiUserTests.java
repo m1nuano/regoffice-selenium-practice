@@ -22,7 +22,6 @@ public class ApiUserTests {
         SendUserResponse response = SendUserSteps.createAndValidateUser(request);
 
         SoftAssert softAssert = new SoftAssert();
-
         softAssert.assertNotNull(response.getData(), "Data cannot be null");
         softAssert.assertEquals(response.getRequestId().length(), 36, "RequestId must be UUID format");
 
