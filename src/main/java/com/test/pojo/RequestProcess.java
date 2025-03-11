@@ -1,5 +1,6 @@
 package com.test.pojo;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -10,7 +11,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class RequestProcess {
-    private int applId;
-    private int staffid;
+    @JsonProperty("applId")
+    private int applicationId;
+    @JsonProperty("staffid")
+    private int staffId;
+    @JsonProperty("actiobn")
     private String action;
 }

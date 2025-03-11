@@ -40,11 +40,11 @@ public class SendUserSteps {
                 .citizenAddress(data.getAddress());
 
         Optional.ofNullable(data.getBirthData()).ifPresent(birthData -> builder
-                .birth_place(birthData.getBirthAddress())
-                .birth_mother(birthData.getMother())
-                .birth_father(birthData.getFather())
-                .birth_grandpa(birthData.getGrandpa())
-                .birth_grandma(birthData.getGrandma()));
+                .birthPlace(birthData.getBirthAddress())
+                .birthMother(birthData.getMother())
+                .birthFather(birthData.getFather())
+                .birthGrandpa(birthData.getGrandpa())
+                .birthGrandma(birthData.getGrandma()));
 
         Optional.ofNullable(data.getMarriageData()).ifPresent(marriageData -> builder
                 .dateOfMarriage(marriageData.getDateOfRegistration())
@@ -52,12 +52,12 @@ public class SendUserSteps {
                 .anotherPersonLastName(marriageData.getLastNameOfSpouse())
                 .anotherPersonFirstName(marriageData.getFirstNameOfSpouse())
                 .anotherPersonMiddleName(marriageData.getMiddleNameOfSpouse())
-                .birth_of_anotoherPerson(marriageData.getDateOfBirthOfSpouse())
+                .birthOfAnotherPerson(marriageData.getDateOfBirthOfSpouse())
                 .anotherPersonPassport(marriageData.getPassportNumberOfSpouse()));
 
         Optional.ofNullable(data.getDeathData()).ifPresent(deathData -> builder
-                .death_dateOfDeath(deathData.getDateOfDeath())
-                .death_placeOfDeath(deathData.getPlaceOfDeath()));
+                .deathDateOfDeath(deathData.getDateOfDeath())
+                .deathPlaceOfDeath(deathData.getPlaceOfDeath()));
 
         SendUserRequest request = builder.build();
 

@@ -20,8 +20,8 @@ public class ProcessSteps {
         log.info("Creating process request with applicationId: {}, staffId: {}, action: {}", applicationId, staffId, action);
 
         RequestProcess request = RequestProcess.builder()
-                .applId(applicationId)
-                .staffid(staffId)
+                .applicationId(applicationId)
+                .staffId(staffId)
                 .action(action)
                 .build();
 

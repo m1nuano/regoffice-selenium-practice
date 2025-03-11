@@ -1,5 +1,6 @@
 package com.test.pojo;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -10,13 +11,22 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ApplicationData {
-    private Integer applicationid;
-    private Integer citizenid;
-    private Integer applicantid;
-    private Integer staffid;
-    private String dateofapplication;
-    private String kindofapplication;
-    private String statusofapplication;
+    @JsonProperty("applicationid")
+    private Integer applicationId;
+    @JsonProperty("citizenid")
+    private Integer citizenId;
+    @JsonProperty("applicantid")
+    private Integer applicantId;
+    @JsonProperty("staffid")
+    private Integer staffId;
+    @JsonProperty("dateofapplication")
+    private String dateOfApplication;
+    @JsonProperty("kindofapplication")
+    private String kindOfApplication;
+    @JsonProperty("statusofapplication")
+    private String statusOfApplication;
+    @JsonProperty("channel")
     private String channel;
+    @JsonProperty("image")
     private String image;
 }

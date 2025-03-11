@@ -1,5 +1,6 @@
 package com.test.pojo;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -10,7 +11,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ApplicationStatusData {
-    private String dateofapplication;
-    private String kindofapplication;
-    private String statusofapplication;
+    @JsonProperty("dateofapplication")
+    private String dateOfApplication;
+    @JsonProperty("kindofapplication")
+    private String kindOfApplication;
+    @JsonProperty("statusofapplication")
+    private String statusOfApplication;
 }

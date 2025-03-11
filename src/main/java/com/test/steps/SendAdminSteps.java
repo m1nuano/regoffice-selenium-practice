@@ -26,7 +26,7 @@ public class SendAdminSteps {
                 .personalMiddleName(TEST_NAME)
                 .personalPhoneNumber(TEST_PHONE)
                 .personalNumberOfPassport(TEST_PASSPORT)
-                .dateofbirth(TEST_DATE)
+                .dateOfBirth(TEST_DATE)
                 .build();
 
         log.info("Admin request created: {}", request);

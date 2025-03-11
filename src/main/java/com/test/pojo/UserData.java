@@ -13,7 +13,6 @@ public class UserData {
     private int applicantid;
     private int citizenid;
     private int applicationid;
-
     private Integer birthcertificateid;
     private Integer deathcertificateid;
     private Integer merrigecertificateid;

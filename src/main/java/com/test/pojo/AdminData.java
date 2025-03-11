@@ -1,5 +1,6 @@
 package com.test.pojo;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -10,5 +11,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class AdminData {
-    private int staffid;
+    @JsonProperty("staffid")
+    private int staffId;
 }
