@@ -25,6 +25,9 @@
         <jackson-dataformat-yaml.version>2.12.4</jackson-dataformat-yaml.version>
         <rest-assured.version>5.5.0</rest-assured.version>
         <jackson.version>2.18.1</jackson.version>
+        <hibernate.version>6.3.1.Final</hibernate.version>
+        <postgresql.version>42.7.4</postgresql.version>
+        <jakarta-persistence.version>3.1.0</jakarta-persistence.version>
     </properties>
 
     <dependencies>
@@ -105,6 +108,24 @@
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-core</artifactId>
             <version>${jackson.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.hibernate.orm</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>${hibernate.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>${postgresql.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>jakarta.persistence</groupId>
+            <artifactId>jakarta.persistence-api</artifactId>
+            <version>${jakarta-persistence.version}</version>
         </dependency>
     </dependencies>
 
