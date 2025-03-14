@@ -1,20 +1,18 @@
 package com.test.utils;
 
+import com.test.drivers.WebDriverSingleton;
 import io.qameta.allure.Attachment;
 import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.NoSuchSessionException;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
-import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
 
-import java.util.concurrent.TimeUnit;
-import java.util.List;
 import java.util.ArrayList;
-
-import static com.test.constants.TestConstants.DRIVER_VARIABLE;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 @Log4j2
 public class TestListener implements ITestListener {
@@ -43,7 +41,7 @@ public class TestListener implements ITestListener {
             logApiRequestResponse(result);
         }
 
-        takeScreenshot(result);
+        takeScreenshot();
     }
 
     @Override
@@ -54,7 +52,7 @@ public class TestListener implements ITestListener {
             logApiRequestResponse(result);
         }
 
-        takeScreenshot(result);
+        takeScreenshot();
     }
 
     private void logApiRequestResponse(ITestResult result) {
@@ -76,10 +74,9 @@ public class TestListener implements ITestListener {
     }
 
     @Attachment(value = "Last screen state", type = "image/png")
-    private byte[] takeScreenshot(ITestResult iTestResult) {
-        ITestContext context = iTestResult.getTestContext();
+    private byte[] takeScreenshot() {
         try {
-            WebDriver driver = (WebDriver) context.getAttribute(DRIVER_VARIABLE);
+            WebDriver driver = WebDriverSingleton.getDriver();
             if (driver != null) {
                 return ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
             } else {

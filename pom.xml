@@ -28,6 +28,8 @@
         <hibernate.version>6.3.1.Final</hibernate.version>
         <postgresql.version>42.7.4</postgresql.version>
         <jakarta-persistence.version>3.1.0</jakarta-persistence.version>
+        <cucumber.version>7.15.0</cucumber.version>
+        <spring.version>6.2.0</spring.version>
     </properties>
 
     <dependencies>
@@ -127,6 +129,42 @@
             <artifactId>jakarta.persistence-api</artifactId>
             <version>${jakarta-persistence.version}</version>
         </dependency>
+
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-java</artifactId>
+            <version>${cucumber.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-testng</artifactId>
+            <version>${cucumber.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-spring</artifactId>
+            <version>${cucumber.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-cucumber7-jvm</artifactId>
+            <version>${allure.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -136,6 +174,9 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>${maven-surefire-plugin.version}</version>
                 <configuration>
+                    <systemPropertyVariables>
+                        <cucumber.plugin>io.qameta.allure.cucumber7jvm.AllureCucumber7Jvm</cucumber.plugin>
+                    </systemPropertyVariables>
                     <argLine>
                         -javaagent:${settings.localRepository}/org/aspectj/aspectjweaver/${aspectjweaver.version}/aspectjweaver-${aspectjweaver.version}.jar
                         -Xmx256m

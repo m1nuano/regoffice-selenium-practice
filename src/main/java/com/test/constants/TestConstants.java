@@ -36,8 +36,6 @@ public class TestConstants {
     public static final int MID_INTERVAL = 5;
     public static final int LONG_INTERVAL = 10;
 
-    public static final String DRIVER_VARIABLE = "Driver";
-
     public static final String MODE_BIRTH = "birth";
     public static final String MODE_WEDDING = "wedding";
     public static final String MODE_DEATH = "death";
