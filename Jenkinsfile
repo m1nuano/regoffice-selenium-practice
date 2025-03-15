@@ -16,7 +16,6 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                bat "mvn --version" // Проверка
                 git branch: "${params.BRANCH}", url: 'https://github.com/m1nuano/regoffice-selenium-practice.git'
             }
         }

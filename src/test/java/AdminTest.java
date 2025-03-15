@@ -1,5 +1,9 @@
 import com.test.components.AdminTableRows;
+import com.test.models.AppData;
 import com.test.models.BirthData;
+import com.test.pojo.SendUserRequest;
+import com.test.pojo.SendUserResponse;
+import com.test.steps.SendUserSteps;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Step;
@@ -14,23 +18,24 @@ public class AdminTest extends BaseTest {
     private String applicationNumber;
 
     @BeforeMethod
-    @Step("Creating birth application and getting application number from administrator table")
+    @Step("Creating birth application via API and getting application number")
     public void createBirthApplication() {
-        mainPageSteps.chooseRole(TEST_USERROLE);
+        AppData birthData = new AppData(
+                TEST_NAME,
+                TEST_PHONE,
+                TEST_PASSPORT,
+                TEST_ADDRESS,
+                TEST_DATE,
+                TEST_GENDER,
+                MODE_BIRTH,
+                new BirthData(TEST_ADDRESS, TEST_NAME, TEST_NAME, TEST_NAME, TEST_NAME),
+                null,
+                null
+        );
 
-        applicantPageSteps.fillApplicantFormPage(TEST_NAME, TEST_NAME, TEST_NAME, TEST_PHONE, TEST_PASSPORT, TEST_ADDRESS);
-
-        typeOfApplicationSteps.chooseApplication(APP_BIRTH);
-
-        citizenSteps.fillCitizenFormPage(TEST_NAME, TEST_NAME, TEST_NAME, TEST_DATE, TEST_PASSPORT, TEST_GENDER, TEST_ADDRESS);
-
-        BirthData birthData = new BirthData(TEST_ADDRESS, TEST_NAME, TEST_NAME, TEST_NAME, TEST_NAME);
-        birthAppSteps.fillBirthApplicationPage(birthData);
-
-        appStatusSteps.performAction(BUTTON_CLOSE);
-
+        SendUserSteps.createApplicationRequest(MODE_BIRTH, birthData);
+        
         mainPageSteps.chooseRole(TEST_ADMINROLE);
-
         adminPageSteps.fillAdminFormPage(TEST_NAME, TEST_NAME, TEST_NAME, TEST_PHONE, TEST_PASSPORT, TEST_DATE);
 
         AdminTableRows adminTableRows = adminTableSteps.getFirstRow();
