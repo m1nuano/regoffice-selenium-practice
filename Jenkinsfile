@@ -42,4 +42,20 @@ pipeline {
             }
         }
     }
+
+    post {
+        always {
+            emailext(
+                subject: "Результаты тестов: ${currentBuild.currentResult} (Сборка #${currentBuild.number})",
+                body: """
+                        <p>Статус сборки: ${currentBuild.currentResult}</p>
+                        <p>Ссылка на сборку: ${env.BUILD_URL}</p>
+                        <p>Отчет Allure: <a href="${env.BUILD_URL}allure/">здесь</a></p>
+                    """,
+                to: 'aliakseiliyutich@gmail.com',
+                attachmentsPattern: 'target/allure-report/**/*.zip',
+                mimeType: 'text/html'
+            )
+        }
+    }
 }
