@@ -15,12 +15,13 @@ import org.testng.annotations.Test;
 import static com.test.constants.TestConstants.*;
 
 public class AdminTest extends BaseTest {
+    
     private String applicationNumber;
 
     @BeforeMethod
     @Step("Creating birth application via API and getting application number")
     public void createBirthApplication() {
-        AppData birthData = new AppData(
+        AppData data = new AppData(
                 TEST_NAME,
                 TEST_PHONE,
                 TEST_PASSPORT,
@@ -33,13 +34,13 @@ public class AdminTest extends BaseTest {
                 null
         );
 
-        SendUserSteps.createApplicationRequest(MODE_BIRTH, birthData);
-        
+        SendUserRequest userRequest = SendUserSteps.createApplicationRequest(MODE_BIRTH, data);
+        SendUserResponse userResponse = SendUserSteps.createAndValidateUser(userRequest);
+
+        applicationNumber = String.valueOf(userResponse.getData().getApplicationid());
+
         mainPageSteps.chooseRole(TEST_ADMINROLE);
         adminPageSteps.fillAdminFormPage(TEST_NAME, TEST_NAME, TEST_NAME, TEST_PHONE, TEST_PASSPORT, TEST_DATE);
-
-        AdminTableRows adminTableRows = adminTableSteps.getFirstRow();
-        applicationNumber = adminTableRows.getRequestNumber();
     }
 
     @Epic("Admin table tests")

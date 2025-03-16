@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     tools {
-        maven "M1"
+        maven "M3"
     }
 
     triggers {
