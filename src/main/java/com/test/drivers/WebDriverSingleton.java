@@ -13,7 +13,7 @@ public class WebDriverSingleton {
 
     public static WebDriver getDriver() {
         if (driver == null) {
-            log.info("WebDriver initialisation (ChromeDriver)");
+            log.info("WebDriver initialization (ChromeDriver)");
             WebDriverManager.chromedriver().setup();
             ChromeOptions options = new ChromeOptions();
             options.setCapability("useChromium", true);

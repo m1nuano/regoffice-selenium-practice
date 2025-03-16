@@ -4,8 +4,8 @@ import org.testng.annotations.BeforeMethod;
 
 public class DbBaseTest {
 
-    DatabaseApplicantSteps dbApplicantSteps;
-    DatabaseStaffSteps dbStaffSteps;
+    protected DatabaseApplicantSteps dbApplicantSteps;
+    protected DatabaseStaffSteps dbStaffSteps;
 
     @BeforeMethod
     public void setUp() {

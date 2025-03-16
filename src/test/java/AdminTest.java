@@ -15,7 +15,7 @@ import org.testng.annotations.Test;
 import static com.test.constants.TestConstants.*;
 
 public class AdminTest extends BaseTest {
-    
+
     private String applicationNumber;
 
     @BeforeMethod
@@ -34,10 +34,10 @@ public class AdminTest extends BaseTest {
                 null
         );
 
-        SendUserRequest userRequest = SendUserSteps.createApplicationRequest(MODE_BIRTH, data);
-        SendUserResponse userResponse = SendUserSteps.createAndValidateUser(userRequest);
+        SendUserRequest sendBirthApplicationRequest = SendUserSteps.createApplicationRequest(MODE_BIRTH, data);
+        SendUserResponse birthApplicationResponse = SendUserSteps.createAndValidateUser(sendBirthApplicationRequest);
 
-        applicationNumber = String.valueOf(userResponse.getData().getApplicationid());
+        applicationNumber = String.valueOf(birthApplicationResponse.getData().getApplicationid());
 
         mainPageSteps.chooseRole(TEST_ADMINROLE);
         adminPageSteps.fillAdminFormPage(TEST_NAME, TEST_NAME, TEST_NAME, TEST_PHONE, TEST_PASSPORT, TEST_DATE);

@@ -14,10 +14,6 @@ public class AdminTableSteps {
         adminTablePage = new AdminTablePage(driver);
     }
 
-    public List<AdminTableRows> getAdminTableRows() {
-        return adminTablePage.getAllRequestRows();
-    }
-
     @Step("Getting first row from admin table")
     public AdminTableRows getFirstRow() {
         return adminTablePage.getAllRequestRows().get(0);

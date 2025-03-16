@@ -29,11 +29,5 @@ public class HibernateUtil {
             log.error("Error building Hibernate SessionFactory", ex);
             throw new ExceptionInInitializerError("Initial SessionFactory creation failed: " + ex);
         }
-
-    }
-
-    public static void shutdown() {
-        log.debug("Shutting down Hibernate SessionFactory");
-        getSessionFactory().close();
     }
 }

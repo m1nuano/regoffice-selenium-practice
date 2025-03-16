@@ -17,9 +17,6 @@ public class AdminTableRows {
     private Waiters waiters;
 
     private static final By REQUEST_NUMBER = By.cssSelector("td:nth-of-type(1)");
-    private static final By APPLICANT_NAME = By.cssSelector("td:nth-of-type(2)");
-    private static final By APPLICATION_TYPE = By.cssSelector("td:nth-of-type(3)");
-    private static final By APPLICATION_TIME = By.cssSelector("td:nth-of-type(4)");
     private static final By APPLICATION_STATUS = By.cssSelector("td:nth-of-type(5)");
 
     private static final String BUTTON_LOCATOR_TEMPLATE = "td:nth-of-type(6) button svg[data-testid='%s']";
@@ -34,27 +31,6 @@ public class AdminTableRows {
         String requestNumber = rowElement.findElement(REQUEST_NUMBER).getText();
         log.info("The application number was received: {}", requestNumber);
         return requestNumber;
-    }
-
-    @Step("Getting applicant name from row of table")
-    public String getApplicantName() {
-        String applicantName = rowElement.findElement(APPLICANT_NAME).getText();
-        log.info("The name of the applicant was received: {}", applicantName);
-        return applicantName;
-    }
-
-    @Step("Getting application type from row of table")
-    public String getApplicationType() {
-        String applicationType = rowElement.findElement(APPLICATION_TYPE).getText();
-        log.info("The type of application was received: {}", applicationType);
-        return applicationType;
-    }
-
-    @Step("Getting application creation time from row of table")
-    public String getApplicationTime() {
-        String applicationTime = rowElement.findElement(APPLICATION_TIME).getText();
-        log.info("The time of creating the application was received: {}", applicationTime);
-        return applicationTime;
     }
 
     @Step("Getting application status from row of table")

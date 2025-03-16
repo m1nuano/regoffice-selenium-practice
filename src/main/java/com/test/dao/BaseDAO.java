@@ -3,7 +3,6 @@ package com.test.dao;
 import com.test.utils.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import java.util.List;
 
 public abstract class BaseDAO<T> {
     private final Class<T> entityClass;
@@ -26,12 +25,6 @@ public abstract class BaseDAO<T> {
     public T findById(Long id) {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             return session.get(entityClass, id);
-        }
-    }
-
-    public List<T> findAll() {
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            return session.createQuery("from " + entityClass.getSimpleName(), entityClass).list();
         }
     }
 }
