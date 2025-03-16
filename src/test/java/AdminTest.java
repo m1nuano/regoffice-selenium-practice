@@ -34,8 +34,8 @@ public class AdminTest extends BaseTest {
                 null
         );
 
-        SendUserRequest sendBirthApplicationRequest = SendUserSteps.createApplicationRequest(MODE_BIRTH, data);
-        SendUserResponse birthApplicationResponse = SendUserSteps.createAndValidateUser(sendBirthApplicationRequest);
+        SendUserRequest birthApplicationRequest = SendUserSteps.createApplicationRequest(MODE_BIRTH, data);
+        SendUserResponse birthApplicationResponse = SendUserSteps.createAndValidateUser(birthApplicationRequest);
 
         applicationNumber = String.valueOf(birthApplicationResponse.getData().getApplicationid());
 
