@@ -4,14 +4,34 @@
     <listeners>
         <listener class-name="com.test.utils.TestListener"/>
     </listeners>
-    <test name="Admin Tests">
+    <test name="AdminTests">
         <classes>
             <class name="AdminTest"/>
         </classes>
     </test>
-    <test name="Application Tests">
+    <test name="CreateEveryApplicationTests">
         <classes>
             <class name="CreateEveryApplicationTest"/>
+        </classes>
+    </test>
+    <test name="ApiAdminTests">
+        <classes>
+            <class name="ApiAdminTests"/>
+        </classes>
+    </test>
+    <test name="ApiUsersTests">
+        <classes>
+            <class name="ApiUserTests"/>
+        </classes>
+    </test>
+    <test name="DatabaseApplicantTests">
+        <classes>
+            <class name="DatabaseApplicantTests"/>
+        </classes>
+    </test>
+    <test name="DatabaseStaffTests">
+        <classes>
+            <class name="DatabaseStaffTests"/>
         </classes>
     </test>
 </suite>

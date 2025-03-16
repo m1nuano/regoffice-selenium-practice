@@ -13,18 +13,18 @@ import static com.test.constants.UrlConstants.BASE_URL;
 
 @Listeners(TestListener.class)
 public class BaseTest {
-    WebDriver driver;
 
-    AdminPageSteps adminPageSteps;
-    AdminTableSteps adminTableSteps;
-    ApplicantPageSteps applicantPageSteps;
-    AppStatusSteps appStatusSteps;
-    BirthAppSteps birthAppSteps;
-    CitizenSteps citizenSteps;
-    DeathAppSteps deathAppSteps;
-    MainPageSteps mainPageSteps;
-    MarriageAppSteps marriageAppSteps;
-    TypeOfApplicationSteps typeOfApplicationSteps;
+    protected WebDriver driver;
+    protected AdminPageSteps adminPageSteps;
+    protected AdminTableSteps adminTableSteps;
+    protected ApplicantPageSteps applicantPageSteps;
+    protected AppStatusSteps appStatusSteps;
+    protected BirthAppSteps birthAppSteps;
+    protected CitizenSteps citizenSteps;
+    protected DeathAppSteps deathAppSteps;
+    protected MainPageSteps mainPageSteps;
+    protected MarriageAppSteps marriageAppSteps;
+    protected TypeOfApplicationSteps typeOfApplicationSteps;
 
     @BeforeMethod
     public void setup() {

@@ -1,6 +1,5 @@
 package com.test.config;
 
-import com.test.components.AdminTableRows;
 import com.test.drivers.WebDriverSingleton;
 import com.test.steps.*;
 import org.openqa.selenium.WebDriver;

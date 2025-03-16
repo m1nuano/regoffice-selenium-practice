@@ -3,7 +3,8 @@ package com.test.drivers;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 
 @Log4j2
 public class WebDriverSingleton {
@@ -12,9 +13,13 @@ public class WebDriverSingleton {
 
     public static WebDriver getDriver() {
         if (driver == null) {
-            log.info("WebDriver initialisation (EdgeDriver)");
-            WebDriverManager.edgedriver().setup();
-            driver = new EdgeDriver();
+            log.info("WebDriver initialization (ChromeDriver)");
+            WebDriverManager.chromedriver().setup();
+            ChromeOptions options = new ChromeOptions();
+            options.setCapability("useChromium", true);
+            options.addArguments("--disable-gpu");
+            options.addArguments("--no-sandbox");
+            driver = new ChromeDriver();
             log.info("WebDriver has been successfully created");
         } else {
             log.debug("Return the existing copy of Webdriver");
