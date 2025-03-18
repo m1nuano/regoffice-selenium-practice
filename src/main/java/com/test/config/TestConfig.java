@@ -1,6 +1,6 @@
 package com.test.config;
 
-import com.test.drivers.WebDriverSingleton;
+import com.test.drivers.WebDriverFactory;
 import com.test.steps.*;
 import org.openqa.selenium.WebDriver;
 import org.springframework.context.annotation.Bean;
@@ -9,7 +9,11 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class TestConfig {
 
-    private final WebDriver driver = WebDriverSingleton.getDriver();
+    private final WebDriver driver;
+
+    public TestConfig() {
+        this.driver = WebDriverFactory.getDriver();
+    }
 
     @Bean
     public MainPageSteps mainPageSteps() {

@@ -5,12 +5,11 @@ import io.qameta.allure.Step;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
+@Epic("Database tests")
 public class DatabaseStaffTests extends DbBaseTest {
 
-    @Epic("Database tests")
     @Feature("Staff creation and saving")
-    @Test
-    @Step("Creating staff and checking this staff is created correctly")
+    @Test(description = "Creating staff and checking this staff is created correctly")
     void testCreateStaff() {
         Staff staff = dbStaffSteps.createAndSaveStaff();
         Staff fromDb = dbStaffSteps.getStaffFromDb(staff.getStaffId());

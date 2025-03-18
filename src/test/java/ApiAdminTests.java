@@ -14,6 +14,7 @@ import org.testng.asserts.SoftAssert;
 import static com.test.constants.TestConstants.*;
 
 @Listeners({TestListener.class})
+@Epic("API")
 public class ApiAdminTests {
 
     private Integer applicationId;
@@ -71,10 +72,9 @@ public class ApiAdminTests {
         staffId = adminResponse.getData().getStaffId();
     }
 
-    @Epic("API")
+
     @Feature("Send process request")
-    @Test
-    @Step("POST processRequest")
+    @Test(description = "POST processRequest")
     public void testProcessRequest() {
         RequestProcess request = ProcessSteps.createProcessRequest(applicationId, staffId, "approved");
         ResponseProcess response = ProcessSteps.createAndValidateProcess(request);
@@ -89,10 +89,8 @@ public class ApiAdminTests {
         softAssert.assertAll();
     }
 
-    @Epic("API")
     @Feature("Send get applications request")
-    @Test
-    @Step("GET getApplications")
+    @Test(description = "GET getApplications")
     public void testGetApplications() {
         GetApplicationsResponse response = GetApplicationsSteps.sendGetApplicationsRequest();
 
@@ -106,10 +104,8 @@ public class ApiAdminTests {
         softAssert.assertAll();
     }
 
-    @Epic("API")
     @Feature("Send get application status request")
-    @Test
-    @Step("GET getApplicationStatus/applId")
+    @Test(description = "GET getApplicationStatus/applId")
     public void testGetApplicationStatus() {
         GetApplStatusResponse response = GetApplStatusSteps.createAndValidateStatus(applicationId);
 

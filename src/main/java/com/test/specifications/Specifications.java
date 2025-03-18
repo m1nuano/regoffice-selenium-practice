@@ -1,20 +1,21 @@
 package com.test.specifications;
 
+import com.test.config.ConfigProperties;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.builder.ResponseSpecBuilder;
 import io.restassured.http.ContentType;
 import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
 
-import static com.test.constants.UrlConstants.BASE_URL;
 import static org.hamcrest.Matchers.notNullValue;
 
 public class Specifications {
 
     public static RequestSpecification requestSpecification(){
-        String username = System.getenv("APP_USERNAME");
-        String password = System.getenv("APP_PASSWORD");
-        String formattedUrl = String.format(BASE_URL, username, password);
+        String url = ConfigProperties.getProperty("APP_URL");
+        String username = ConfigProperties.getProperty("APP_USERNAME");
+        String password = ConfigProperties.getProperty("APP_PASSWORD");
+        String formattedUrl = String.format(url, username, password);
 
         return new RequestSpecBuilder()
                 .setBaseUri(formattedUrl)

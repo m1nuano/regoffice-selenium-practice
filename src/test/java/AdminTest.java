@@ -14,6 +14,7 @@ import org.testng.annotations.Test;
 
 import static com.test.constants.TestConstants.*;
 
+@Epic("Admin table tests")
 public class AdminTest extends BaseTest {
 
     private String applicationNumber;
@@ -43,10 +44,8 @@ public class AdminTest extends BaseTest {
         adminPageSteps.fillAdminFormPage(TEST_NAME, TEST_NAME, TEST_NAME, TEST_PHONE, TEST_PASSPORT, TEST_DATE);
     }
 
-    @Epic("Admin table tests")
     @Feature("Test of the last application for display in the table")
-    @Test
-    @Step("Checking the last application is displayed in the administrator table")
+    @Test(description = "Checking the last application is displayed in the administrator table")
     public void testAdminTable() {
         AdminTableRows row = adminTableSteps.getFirstRow();
         String requestNumber = row.getRequestNumber();
@@ -54,10 +53,8 @@ public class AdminTest extends BaseTest {
         Assert.assertEquals(requestNumber, applicationNumber);
     }
 
-    @Epic("Admin table tests")
     @Feature("Checking a change in application status")
-    @Test(dataProvider = "applicationStatusChanges")
-    @Step("Verification of changes in the status of an application: {0} -> {1}")
+    @Test(dataProvider = "applicationStatusChanges", description = "Verification of changes in the status of an application: {0} -> {1}")
     public void testAdminChangeApplicationStatus(String actionType, String expectedStatus) {
         AdminTableRows row = adminTableSteps.getFirstRow();
 
