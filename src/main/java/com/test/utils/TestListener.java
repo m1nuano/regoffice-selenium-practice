@@ -1,6 +1,6 @@
 package com.test.utils;
 
-import com.test.drivers.WebDriverSingleton;
+import com.test.drivers.WebDriverFactory;
 import io.qameta.allure.Attachment;
 import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.NoSuchSessionException;
@@ -76,7 +76,7 @@ public class TestListener implements ITestListener {
     @Attachment(value = "Last screen state", type = "image/png")
     private byte[] takeScreenshot() {
         try {
-            WebDriver driver = WebDriverSingleton.getDriver();
+            WebDriver driver = WebDriverFactory.getDriver();
             if (driver != null) {
                 return ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
             } else {
@@ -84,6 +84,8 @@ public class TestListener implements ITestListener {
             }
         } catch (NoSuchSessionException | IllegalStateException ex) {
             return new byte[]{};
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
 

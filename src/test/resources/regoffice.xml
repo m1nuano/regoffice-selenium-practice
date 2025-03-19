@@ -1,37 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Test Suite" parallel="tests" thread-count="1">
+<suite name="Test Suite" parallel="tests" thread-count="3">
     <listeners>
         <listener class-name="com.test.utils.TestListener"/>
     </listeners>
-    <test name="AdminTests">
+    <test name="Admin Tests">
+        <parameter name="browser" value="chrome"/>
         <classes>
             <class name="AdminTest"/>
         </classes>
     </test>
     <test name="CreateEveryApplicationTests">
+        <parameter name="browser" value="firefox"/>
         <classes>
             <class name="CreateEveryApplicationTest"/>
         </classes>
     </test>
     <test name="ApiAdminTests">
+        <parameter name="browser" value="chrome"/>
         <classes>
             <class name="ApiAdminTests"/>
         </classes>
     </test>
     <test name="ApiUsersTests">
+        <parameter name="browser" value="firefox"/>
         <classes>
             <class name="ApiUserTests"/>
         </classes>
     </test>
-    <test name="DatabaseApplicantTests">
-        <classes>
-            <class name="DatabaseApplicantTests"/>
-        </classes>
-    </test>
     <test name="DatabaseStaffTests">
+        <parameter name="browser" value="chrome"/>
         <classes>
             <class name="DatabaseStaffTests"/>
+        </classes>
+    </test>
+    <test name="DatabaseApplicantTests">
+        <parameter name="browser" value="firefox"/>
+        <classes>
+            <class name="DatabaseApplicantTests"/>
         </classes>
     </test>
 </suite>

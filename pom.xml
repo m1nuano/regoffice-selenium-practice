@@ -13,12 +13,13 @@
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-        <selenium.version>4.19.1</selenium.version>
+        <selenium.version>4.21.0</selenium.version>
         <webdriver-manager.version>5.9.2</webdriver-manager.version>
         <testng.version>7.4.0</testng.version>
         <lombok.version>1.18.30</lombok.version>
         <allure.version>2.29.1</allure.version>
         <maven-surefire-plugin.version>3.5.2</maven-surefire-plugin.version>
+        <maven-dependency-plugin.version>3.1.1</maven-dependency-plugin.version>
         <aspectjweaver.version>1.9.22</aspectjweaver.version>
         <allure-maven-plugin.version>2.11.2</allure-maven-plugin.version>
         <log4j-core.version>2.17.1</log4j-core.version>
@@ -28,7 +29,7 @@
         <hibernate.version>6.3.1.Final</hibernate.version>
         <postgresql.version>42.7.4</postgresql.version>
         <jakarta-persistence.version>3.1.0</jakarta-persistence.version>
-        <cucumber.version>7.15.0</cucumber.version>
+        <cucumber.version>7.17.0</cucumber.version>
         <spring.version>6.2.0</spring.version>
     </properties>
 
@@ -171,11 +172,16 @@
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>${maven-dependency-plugin.version}</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>${maven-surefire-plugin.version}</version>
                 <configuration>
                     <suiteXmlFiles>
-                        <suiteXmlFile>src/test/resources/regoffice-testng.xml</suiteXmlFile>
+                        <suiteXmlFile>src/test/resources/regoffice.xml</suiteXmlFile>
                     </suiteXmlFiles>
                     <systemPropertyVariables>
                         <cucumber.plugin>io.qameta.allure.cucumber7jvm.AllureCucumber7Jvm</cucumber.plugin>
@@ -199,6 +205,20 @@
                         <version>${aspectjweaver.version}</version>
                     </dependency>
                 </dependencies>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.1.0</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
 
             <plugin>

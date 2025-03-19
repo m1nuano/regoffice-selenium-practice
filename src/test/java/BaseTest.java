@@ -1,15 +1,13 @@
-import com.test.drivers.WebDriverSingleton;
+import com.test.config.ConfigProperties;
+import com.test.drivers.WebDriverFactory;
 import com.test.steps.*;
 import com.test.utils.TestListener;
 import org.openqa.selenium.WebDriver;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Listeners;
+import org.testng.annotations.*;
 
 import java.time.Duration;
 
 import static com.test.constants.TestConstants.MID_INTERVAL;
-import static com.test.constants.UrlConstants.BASE_URL;
 
 @Listeners(TestListener.class)
 public class BaseTest {
@@ -27,20 +25,24 @@ public class BaseTest {
     protected TypeOfApplicationSteps typeOfApplicationSteps;
 
     @BeforeMethod
-    public void setup() {
-        String username = System.getenv("APP_USERNAME");
-        String password = System.getenv("APP_PASSWORD");
-        String formattedUrl = String.format(BASE_URL, username, password);
-        driver = WebDriverSingleton.getDriver();
+    @Parameters("browser")
+    public void setup(@Optional("chrome") String browser) throws Exception {
+        WebDriverFactory.createDriver(browser);
+        driver = WebDriverFactory.getDriver();
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(MID_INTERVAL));
+
+        String url = ConfigProperties.getProperty("APP_URL");
+        String username = ConfigProperties.getProperty("APP_USERNAME");
+        String password = ConfigProperties.getProperty("APP_PASSWORD");
+        String formattedUrl = String.format(url, username, password);
         driver.get(formattedUrl);
-        Duration duration = Duration.ofSeconds(MID_INTERVAL);
-        driver.manage().timeouts().implicitlyWait(duration);
+
         initSteps();
     }
 
-    @AfterTest
+    @AfterMethod
     public void tearDown() {
-        WebDriverSingleton.quitDriver();
+        WebDriverFactory.quitDriver();
     }
 
     public void initSteps(){

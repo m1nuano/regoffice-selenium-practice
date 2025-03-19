@@ -1,5 +1,6 @@
 package com.test.utils;
 
+import com.test.config.ConfigProperties;
 import lombok.Getter;
 import lombok.extern.log4j.Log4j2;
 import org.hibernate.SessionFactory;
@@ -16,10 +17,10 @@ public class HibernateUtil {
         log.debug("Building Hibernate SessionFactory");
         try {
             Properties properties = new Properties();
-            properties.setProperty("hibernate.connection.url", System.getenv("DB_URL"));
-            properties.setProperty("hibernate.connection.username", System.getenv("DB_USER"));
-            properties.setProperty("hibernate.connection.password", System.getenv("DB_PASS"));
-            properties.setProperty("hibernate.default_schema", "reg_office");
+            properties.setProperty("hibernate.connection.url", ConfigProperties.getProperty("DB_URL"));
+            properties.setProperty("hibernate.connection.username", ConfigProperties.getProperty("DB_USER"));
+            properties.setProperty("hibernate.connection.password", ConfigProperties.getProperty("DB_PASS"));
+            properties.setProperty("hibernate.default_schema", ConfigProperties.getProperty("DB_SCHEMA"));
 
             return new Configuration()
                     .addProperties(properties)

@@ -2,6 +2,7 @@ package bdd.step_definitions;
 
 import com.test.components.AdminTableRows;
 import com.test.config.TestConfig;
+import com.test.drivers.WebDriverFactory;
 import com.test.models.BirthData;
 import com.test.steps.*;
 import io.cucumber.java.en.And;
@@ -52,6 +53,7 @@ public class ApplicationStatusChangeSteps {
     @Given("I create the birth application")
     @Step("Creating birth application")
     public void birthApplicationIsCreated() {
+        WebDriverFactory.getDriver();
         mainPageSteps.chooseRole(TEST_USERROLE);
         applicantPageSteps.fillApplicantFormPage(TEST_NAME, TEST_NAME, TEST_NAME, TEST_PHONE, TEST_PASSPORT, TEST_ADDRESS);
         typeOfApplicationSteps.chooseApplication(APP_BIRTH);

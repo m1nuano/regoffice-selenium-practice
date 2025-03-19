@@ -11,12 +11,11 @@ import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
 @Listeners({TestListener.class})
+@Epic("API")
 public class ApiUserTests {
 
-    @Epic("API")
     @Feature("Send user application request with '{mode}' mode")
-    @Test(dataProvider = "sendEveryUserRequest", dataProviderClass = DataProviders.class)
-    @Step("POST sendUserRequest")
+    @Test(dataProvider = "sendEveryUserRequest", dataProviderClass = DataProviders.class, description = "POST sendUserRequest")
     public void testSendUserRequest(String mode, AppData data) {
         SendUserRequest request = SendUserSteps.createApplicationRequest(mode, data);
         SendUserResponse response = SendUserSteps.createAndValidateUser(request);

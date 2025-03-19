@@ -1,19 +1,18 @@
 package bdd.step_definitions;
 
-import bdd.TestRunner;
+import com.test.drivers.WebDriverFactory;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 
 public class Hooks {
-    TestRunner testRunner = new TestRunner();
-
     @Before(value = "@createDriver")
-    public void createDriver() {
-        testRunner.initDriver();
+    public void createDriver() throws Exception {
+        String browser = System.getProperty("browser", "chrome");
+        WebDriverFactory.createDriver(browser);
     }
 
     @After(value = "@removeDriver")
     public void removeDriver() {
-        testRunner.quitDriver();
+        WebDriverFactory.quitDriver();
     }
 }
